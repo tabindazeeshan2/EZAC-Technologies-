@@ -3,6 +3,9 @@ import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 
+import { Navbar } from '@/components/navbar'
+import { Footer } from '@/components/footer'
+
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
@@ -37,7 +40,14 @@ export const metadata: Metadata = {
     description:
       'EZAC Technologies builds modern websites, mobile applications, custom software and AI-powered business automation solutions.',
     siteName: 'EZAC Technologies',
-    images: [{ url: '/ezac-logo.jpeg', width: 1244, height: 1244, alt: 'EZAC Technologies' }],
+    images: [
+      {
+        url: '/ezac-logo.jpeg',
+        width: 1244,
+        height: 1244,
+        alt: 'EZAC Technologies',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
@@ -66,7 +76,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} bg-background`}>
       <body className="font-sans antialiased">
+        <Navbar />
         {children}
+        <Footer />
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
