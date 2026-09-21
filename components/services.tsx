@@ -26,8 +26,9 @@ import { Reveal } from '@/components/reveal'
 const services = [
   {
     number: '01',
+    slug: 'digital-products',
     title: 'Digital Products',
-    short: 'Websites & digital experiences',
+    short: 'Websites, e-commerce & digital experiences',
     description:
       'We design and build modern, high-performance digital experiences that help businesses establish a strong online presence, engage customers and achieve their goals.',
     icon: Globe2,
@@ -40,11 +41,11 @@ const services = [
       { name: 'UI / UX Design', icon: Smartphone },
     ],
   },
-
   {
     number: '02',
+    slug: 'software-applications',
     title: 'Software & Applications',
-    short: 'Custom business software',
+    short: 'Custom software built for your business',
     description:
       'Purpose-built software and applications engineered around your workflows, users and business requirements.',
     icon: Code2,
@@ -57,11 +58,11 @@ const services = [
       { name: 'API Development', icon: Network },
     ],
   },
-
   {
     number: '03',
+    slug: 'ai-and-automation',
     title: 'AI & Automation',
-    short: 'AI-powered automation',
+    short: 'Intelligent systems that work for you',
     description:
       'We build intelligent solutions that automate repetitive work, improve efficiency and create smarter customer and business experiences.',
     icon: Bot,
@@ -74,11 +75,11 @@ const services = [
       { name: 'Process Automation', icon: ArrowRight },
     ],
   },
-
   {
     number: '04',
-    title: 'Cloud & infrastructure',
-    short: 'Cloud systems & hosting',
+    slug: 'cloud-and-infrastructure',
+    title: 'Cloud & Infrastructure',
+    short: 'Reliable, scalable and secure infrastructure',
     description:
       'We provide the infrastructure needed to deploy, operate and scale your digital products reliably.',
     icon: Cloud,
@@ -91,11 +92,11 @@ const services = [
       { name: 'Backup Solutions', icon: Database },
     ],
   },
-
   {
     number: '05',
+    slug: 'it-and-hardware',
     title: 'IT & Hardware',
-    short: 'IT & hardware solutions',
+    short: 'Technology infrastructure for your organization',
     description:
       'From computing hardware and networking to IT support, we help businesses build dependable technology infrastructure.',
     icon: HardDrive,
@@ -108,11 +109,11 @@ const services = [
       { name: 'IT Support', icon: Headphones },
     ],
   },
-
   {
     number: '06',
+    slug: 'security-and-data',
     title: 'Security & Data',
-    short: 'Security & data solutions',
+    short: 'Protect, connect and unlock your data',
     description:
       'We help organizations protect their technology environment, connect their systems and turn business data into useful insights.',
     icon: ShieldCheck,
@@ -138,18 +139,9 @@ export function Services() {
       id="services"
       className="relative overflow-hidden bg-[#020817] py-24 sm:py-32"
     >
-      {/* ============================================================
-          BACKGROUND
-      ============================================================ */}
-
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        {/* Main glow */}
         <div className="absolute left-1/2 top-[20%] h-[600px] w-[900px] -translate-x-1/2 rounded-full bg-sky-500/[0.035] blur-[160px]" />
-
-        {/* Side glow */}
         <div className="absolute -right-40 top-[35%] h-[500px] w-[500px] rounded-full bg-cyan-500/[0.025] blur-[150px]" />
-
-        {/* Grid */}
         <div
           className="
             absolute inset-0 opacity-[0.018]
@@ -160,16 +152,11 @@ export function Services() {
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-
-      
-
         <Reveal>
           <div className="grid gap-10 lg:grid-cols-[1fr_320px] lg:items-end">
-
             <div>
               <div className="mb-5 flex items-center gap-3">
                 <span className="h-px w-9 bg-sky-400" />
-
                 <span className="text-[11px] font-medium uppercase tracking-[0.32em] text-[#7bc4ff]/80">
                   Our Services
                 </span>
@@ -189,7 +176,6 @@ export function Services() {
               </p>
             </div>
 
-            {/* Header side statement */}
             <div className="hidden border-l border-white/[0.08] pl-7 lg:block">
               <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-slate-600">
                 Our approach
@@ -211,17 +197,10 @@ export function Services() {
           </div>
         </Reveal>
 
-       
-
         <Reveal delay={120}>
           <div className="mt-16 overflow-hidden rounded-3xl border border-sky-900/40 bg-[#040b1b]/80 shadow-[0_30px_100px_-50px_rgba(56,189,248,0.35)] backdrop-blur-xl">
-
             <div className="grid lg:grid-cols-[390px_1fr]">
-
-          
-
               <div className="border-b border-white/[0.07] bg-[#030918]/80 lg:border-b-0 lg:border-r">
-
                 {services.map((service, index) => {
                   const Icon = service.icon
                   const isActive = activeService === index
@@ -246,8 +225,6 @@ export function Services() {
                         }
                       `}
                     >
-
-                      {/* Active line */}
                       <span
                         className={`
                           absolute left-0 top-0 h-full w-[2px]
@@ -259,7 +236,6 @@ export function Services() {
                         `}
                       />
 
-                      {/* Number */}
                       <span
                         className={`
                           w-7 shrink-0 font-mono text-xs
@@ -272,7 +248,6 @@ export function Services() {
                         {service.number}
                       </span>
 
-                      {/* Icon */}
                       <span
                         className={`
                           flex size-10 shrink-0 items-center justify-center
@@ -287,7 +262,6 @@ export function Services() {
                         <Icon className="size-4" strokeWidth={1.6} />
                       </span>
 
-                      {/* Name */}
                       <span className="min-w-0 flex-1">
                         <span
                           className={`
@@ -328,11 +302,7 @@ export function Services() {
                 })}
               </div>
 
-     
-
               <div className="relative min-h-[590px] overflow-hidden">
-
-                {/* Decorative giant number */}
                 <div
                   className="
                     pointer-events-none absolute
@@ -346,15 +316,11 @@ export function Services() {
                   {active.number}
                 </div>
 
-                {/* Right side architectural glow */}
                 <div className="pointer-events-none absolute right-[-10%] top-[15%] h-[450px] w-[450px] rounded-full bg-sky-400/[0.045] blur-[100px]" />
 
-                {/* Decorative vertical lines */}
                 <div className="pointer-events-none absolute right-[12%] top-0 h-full w-px bg-gradient-to-b from-transparent via-sky-400/[0.08] to-transparent" />
 
                 <div className="relative flex h-full flex-col p-7 sm:p-10 lg:p-14">
-
-                  {/* Top label */}
                   <div className="flex items-center gap-3">
                     <span className="font-mono text-[10px] tracking-[0.3em] text-sky-400">
                       {active.number}
@@ -367,7 +333,6 @@ export function Services() {
                     </span>
                   </div>
 
-                  {/* Icon */}
                   <div className="mt-10 flex size-16 items-center justify-center rounded-2xl border border-sky-400/20 bg-sky-400/[0.06] text-sky-400 shadow-[0_0_40px_rgba(56,189,248,0.06)]">
                     <ActiveIcon
                       className="size-7"
@@ -375,9 +340,7 @@ export function Services() {
                     />
                   </div>
 
-                  {/* Main heading */}
                   <div className="mt-8 max-w-2xl">
-
                     <h3 className="text-3xl font-semibold tracking-[-0.03em] text-white sm:text-4xl lg:text-[42px] lg:leading-[1.08]">
                       {active.title}
                     </h3>
@@ -385,12 +348,9 @@ export function Services() {
                     <p className="mt-5 max-w-xl text-sm leading-7 text-slate-400 sm:text-base">
                       {active.description}
                     </p>
-
                   </div>
 
-                  {/* Capabilities */}
                   <div className="mt-auto pt-12">
-
                     <div className="mb-5 flex items-center gap-3">
                       <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-slate-600">
                         Capabilities
@@ -424,33 +384,31 @@ export function Services() {
                     </div>
                   </div>
 
-                  {/* CTA */}
                   <div className="mt-10 flex items-center gap-6">
-
-                   <a
-  href="#contact"
-  className="
-    group inline-flex items-center justify-center gap-2
-    h-[40px]
-    rounded-2xl
-    bg-[#078cff]
-    px-5
-    text-[13px]
-    font-semibold
-    text-white
-    shadow-[0_0_18px_rgba(0,140,255,0.25)]
-    transition-all duration-300
-    hover:-translate-y-0.5
-    hover:bg-[#159cff]
-    hover:shadow-[0_0_28px_rgba(0,140,255,0.4)]
-  "
->
-  Start Your Project
-  <ArrowRight className="ml-1.5 size-3.5 transition-transform group-hover:translate-x-1" />
-</a>
-
                     <a
                       href="#contact"
+                      className="
+                        group inline-flex items-center justify-center gap-2
+                        h-[40px]
+                        rounded-2xl
+                        bg-[#078cff]
+                        px-5
+                        text-[13px]
+                        font-semibold
+                        text-white
+                        shadow-[0_0_18px_rgba(0,140,255,0.25)]
+                        transition-all duration-300
+                        hover:-translate-y-0.5
+                        hover:bg-[#159cff]
+                        hover:shadow-[0_0_28px_rgba(0,140,255,0.4)]
+                      "
+                    >
+                      Start Your Project
+                      <ArrowRight className="ml-1.5 size-3.5 transition-transform group-hover:translate-x-1" />
+                    </a>
+
+                    <a
+                      href={`/services/${active.slug}`}
                       className="
                         text-sm font-medium text-slate-400
                         transition-colors hover:text-sky-400
@@ -458,7 +416,6 @@ export function Services() {
                     >
                       Learn More
                     </a>
-
                   </div>
                 </div>
               </div>
@@ -468,7 +425,6 @@ export function Services() {
 
         <Reveal delay={220}>
           <div className="mt-10 grid border-y border-white/[0.06] sm:grid-cols-2 lg:grid-cols-4">
-
             <ValueItem
               icon={Layers3}
               title="End-to-End Solutions"
@@ -492,16 +448,12 @@ export function Services() {
               title="Ongoing Support"
               description="Reliable support and technology partnership beyond launch."
             />
-
           </div>
         </Reveal>
-
       </div>
     </section>
   )
 }
-
-
 
 function ValueItem({
   icon: Icon,
