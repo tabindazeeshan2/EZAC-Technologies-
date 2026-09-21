@@ -28,7 +28,7 @@ const services = [
     number: '01',
     slug: 'digital-products',
     title: 'Digital Products',
-    short: 'Websites, e-commerce & digital experiences',
+    short: 'Websites & digital experiences',
     description:
       'We design and build modern, high-performance digital experiences that help businesses establish a strong online presence, engage customers and achieve their goals.',
     icon: Globe2,
@@ -45,7 +45,7 @@ const services = [
     number: '02',
     slug: 'software-applications',
     title: 'Software & Applications',
-    short: 'Custom software built for your business',
+    short: 'Custom business software',
     description:
       'Purpose-built software and applications engineered around your workflows, users and business requirements.',
     icon: Code2,
@@ -62,7 +62,7 @@ const services = [
     number: '03',
     slug: 'ai-and-automation',
     title: 'AI & Automation',
-    short: 'Intelligent systems that work for you',
+    short: 'Intelligent automation',
     description:
       'We build intelligent solutions that automate repetitive work, improve efficiency and create smarter customer and business experiences.',
     icon: Bot,
@@ -79,7 +79,7 @@ const services = [
     number: '04',
     slug: 'cloud-and-infrastructure',
     title: 'Cloud & Infrastructure',
-    short: 'Reliable, scalable and secure infrastructure',
+    short: 'Scalable & secure cloud',
     description:
       'We provide the infrastructure needed to deploy, operate and scale your digital products reliably.',
     icon: Cloud,
@@ -96,7 +96,7 @@ const services = [
     number: '05',
     slug: 'it-and-hardware',
     title: 'IT & Hardware',
-    short: 'Technology infrastructure for your organization',
+    short: 'Technology infrastructure',
     description:
       'From computing hardware and networking to IT support, we help businesses build dependable technology infrastructure.',
     icon: HardDrive,
@@ -113,7 +113,7 @@ const services = [
     number: '06',
     slug: 'security-and-data',
     title: 'Security & Data',
-    short: 'Protect, connect and unlock your data',
+    short: 'Secure & unlock data',
     description:
       'We help organizations protect their technology environment, connect their systems and turn business data into useful insights.',
     icon: ShieldCheck,
