@@ -1,7 +1,6 @@
 import { Navbar } from '@/components/navbar'
 import { Hero } from '@/components/hero'
 import { Services } from '@/components/services'
-import { Capabilities } from '@/components/capabilities'
 import { WhyEzac } from '@/components/why-ezac'
 import { About } from '@/components/about'
 import { CTA } from '@/components/cta'
@@ -15,7 +14,7 @@ export default function HomePage() {
       <main>
         <Hero />
         <Services />
-        <Capabilities />
+  
         <WhyEzac />
         <About />
         <CTA />

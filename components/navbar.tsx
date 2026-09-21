@@ -57,7 +57,7 @@ export function Navbar() {
       )}
     >
       <nav className="mx-auto flex h-[76px] max-w-[1600px] items-center justify-between px-6 sm:px-8 lg:px-12 xl:px-16">
-        {/* Smaller logo in navbar so hero logo remains the star */}
+        
         <Logo size="default" className="relative z-10" />
 
         <ul className="hidden items-center gap-10 lg:flex">
@@ -99,7 +99,7 @@ export function Navbar() {
           <GlowButton
             href={getHref('#contact')}
             size="md"
-            className="h-[40px] rounded-full bg-[#078cff] px-5 text-[13px] font-semibold shadow-[0_0_18px_rgba(0,140,255,0.25)] transition-all duration-300 hover:bg-[#159cff] hover:shadow-[0_0_28px_rgba(0,140,255,0.4)]"
+            className="h-[40px] rounded-2xl bg-[#078cff] px-5 text-[13px] font-semibold shadow-[0_0_18px_rgba(0,140,255,0.25)] transition-all duration-300 hover:bg-[#159cff] hover:shadow-[0_0_28px_rgba(0,140,255,0.4)]"
           >
             Get Started
             <ArrowRight className="ml-1.5 size-3.5" />

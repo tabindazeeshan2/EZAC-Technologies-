@@ -17,13 +17,6 @@ export function Hero() {
       id="home"
       className="relative min-h-screen overflow-hidden bg-[#020817] pt-[76px] text-white"
     >
-      {/* ========================================
-          CLEAN GRADIENT BACKGROUND
-          No circles
-          No grid
-          No diagonal lines
-          No decorative lines
-          ======================================== */}
 
       <div
         className="pointer-events-none absolute inset-0"
@@ -69,19 +62,13 @@ export function Hero() {
         />
       </div>
 
-      {/* ========================================
-          MAIN CONTENT
-          ======================================== */}
+      
 
       <div className="relative z-10 mx-auto flex min-h-[calc(100vh-76px)] max-w-[1200px] flex-col px-6 pb-16 pt-10 sm:px-8 lg:pt-16">
-        {/* ======================================
-            HERO TWO-COLUMN AREA
-            ====================================== */}
+        
 
         <div className="flex flex-1 flex-col items-center gap-12 lg:flex-row lg:items-center lg:justify-between lg:gap-8">
-          {/* ====================================
-              LEFT — TEXT CONTENT
-              ==================================== */}
+       
 
           <div className="flex max-w-[560px] flex-col items-center text-center lg:items-start lg:text-left">
             {/* Eyebrow */}
@@ -112,7 +99,7 @@ export function Hero() {
               <GlowButton
                 href="#contact"
                 size="lg"
-                className="h-[52px] min-w-[170px] rounded-full bg-[#078cff] px-8 text-[15px] font-semibold transition-all duration-300 hover:bg-[#1a9aff]"
+                className="h-[52px] min-w-[170px] rounded-2xl bg-[#078cff] px-8 text-[15px] font-semibold transition-all duration-300 hover:bg-[#1a9aff]"
               >
                 Get Started
 
@@ -123,17 +110,14 @@ export function Hero() {
                 href="#services"
                 size="lg"
                 variant="outline"
-                className="h-[52px] min-w-[170px] rounded-full border-white/12 bg-white/[0.03] px-7 text-[15px] backdrop-blur-md transition-all duration-300 hover:border-white/25 hover:bg-white/[0.07]"
+                className="h-[52px] min-w-[170px] rounded-2xl border-white/12 bg-white/[0.03] px-7 text-[15px] backdrop-blur-md transition-all duration-300 hover:border-white/25 hover:bg-white/[0.07]"
               >
                 Explore Services
               </GlowButton>
             </div>
           </div>
 
-          {/* ====================================
-              RIGHT — LARGE LOGO
-              ==================================== */}
-
+          
           <div className="relative flex shrink-0 items-center justify-center">
             <Logo
               size="hero"
@@ -142,9 +126,7 @@ export function Hero() {
           </div>
         </div>
 
-        {/* ======================================
-            FEATURE STRIP
-            ====================================== */}
+        
 
         <div className="mt-16 grid w-full grid-cols-1 gap-3 sm:grid-cols-2 lg:mt-20 lg:grid-cols-4">
           <FeatureCard
@@ -176,9 +158,7 @@ export function Hero() {
   )
 }
 
-/* ============================================
-   FEATURE CARD
-   ============================================ */
+
 
 function FeatureCard({
   icon,

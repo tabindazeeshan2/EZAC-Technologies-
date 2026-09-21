@@ -1,15 +1,14 @@
 import {
   Globe,
-  Smartphone,
   Code2,
-  BrainCircuit,
   Lightbulb,
   SlidersHorizontal,
   TrendingUp,
   Target,
-  MonitorSmartphone,
-  LayoutDashboard,
-  Sparkles,
+  Bot,
+  Cloud,
+  Server,
+  ShieldCheck,
   type LucideIcon,
 } from 'lucide-react'
 
@@ -32,6 +31,8 @@ export const navLinks = [
   { label: 'Contact', href: '#contact' },
 ]
 
+
+
 export interface Service {
   id: string
   number: string
@@ -43,102 +44,108 @@ export interface Service {
 
 export const services: Service[] = [
   {
-    id: 'web',
+    id: 'digital-products',
     number: '01',
-    title: 'Website Development',
+    title: 'Digital Products',
     description:
-      'Modern, responsive and high-performing websites designed to give businesses a strong digital presence.',
-    capabilities: [
-      'Business websites',
-      'Corporate websites',
-      'Landing pages',
-      'Responsive web applications',
-      'UI implementation',
-      'Performance optimization',
-    ],
+      'Modern digital experiences that help businesses build their online presence and connect with their customers.',
     icon: Globe,
+    capabilities: [
+      'Corporate Websites',
+      'E-commerce',
+      'Web Applications',
+      'Landing Pages',
+      'CMS Development',
+      'UI / UX Design',
+    ],
   },
+
   {
-    id: 'mobile',
+    id: 'software-applications',
     number: '02',
-    title: 'Mobile App Development',
+    title: 'Software & Applications',
     description:
-      'Custom mobile applications designed around your users, goals and business requirements.',
-    capabilities: [
-      'Android applications',
-      'iOS applications',
-      'Cross-platform applications',
-      'Mobile UI/UX',
-      'API integrations',
-    ],
-    icon: Smartphone,
-  },
-  {
-    id: 'software',
-    number: '03',
-    title: 'Custom Software Development',
-    description:
-      'Scalable software solutions tailored to the specific needs and workflows of your business.',
-    capabilities: [
-      'Business management systems',
-      'Internal tools',
-      'Custom dashboards',
-      'Database-driven applications',
-      'API development',
-      'Cloud-based solutions',
-    ],
+      'Purpose-built software and applications designed around your workflows, users and business requirements.',
     icon: Code2,
-  },
-  {
-    id: 'ai',
-    number: '04',
-    title: 'AI & Business Automation',
-    description:
-      'Intelligent digital solutions that reduce repetitive work, improve efficiency and help businesses operate smarter.',
     capabilities: [
-      'AI-powered applications',
-      'Workflow automation',
-      'AI integrations',
-      'Data processing',
-      'Intelligent business tools',
-      'Process optimization',
+      'Custom Software',
+      'Business Systems',
+      'Mobile Applications',
+      'ERP & CRM',
+      'Custom Dashboards',
+      'API Development',
     ],
-    icon: BrainCircuit,
   },
-]
 
-export interface Capability {
-  title: string
-  description: string
-  icon: LucideIcon
-}
-
-export const capabilities: Capability[] = [
   {
-    title: 'Websites & Digital Experiences',
-    description:
-      'We create responsive websites and digital experiences that communicate your brand, engage visitors and give your business a professional online presence. Our solutions are designed with usability, performance and scalability in mind.',
-    icon: Globe,
-  },
-  {
-    title: 'Mobile Applications',
-    description:
-      'We develop user-focused mobile applications that bring your ideas and services to mobile devices. Applications can be designed for specific business needs, customer experiences or digital products.',
-    icon: MonitorSmartphone,
-  },
-  {
-    title: 'Business Software',
-    description:
-      'We build purpose-driven software, dashboards and internal tools that help businesses organize information, manage workflows and improve day-to-day operations through technology.',
-    icon: LayoutDashboard,
-  },
-  {
+    id: 'ai-automation',
+    number: '03',
     title: 'AI & Automation',
     description:
-      'We integrate practical AI capabilities and automation into digital products and business workflows to help reduce repetitive tasks, process information and create more efficient ways of working.',
-    icon: Sparkles,
+      'Intelligent solutions that automate repetitive work, improve efficiency and create smarter business experiences.',
+    icon: Bot,
+    capabilities: [
+      'AI Applications',
+      'AI Agents',
+      'AI Chatbots',
+      'Business Automation',
+      'Workflow Automation',
+      'AI Integrations',
+    ],
+  },
+
+  {
+    id: 'cloud-infrastructure',
+    number: '04',
+    title: 'Cloud & Infrastructure',
+    description:
+      'Reliable technology infrastructure for hosting, deploying, scaling and maintaining your digital solutions.',
+    icon: Cloud,
+    capabilities: [
+      'Cloud Hosting',
+      'VPS & Servers',
+      'Application Deployment',
+      'DevOps',
+      'CI / CD',
+      'Backup Solutions',
+    ],
+  },
+
+  {
+    id: 'it-hardware',
+    number: '05',
+    title: 'IT & Hardware',
+    description:
+      'Technology hardware, networking and IT infrastructure that keeps your organization connected and productive.',
+    icon: Server,
+    capabilities: [
+      'Computers & Workstations',
+      'Servers',
+      'Network Infrastructure',
+      'Wi-Fi Solutions',
+      'CCTV Systems',
+      'IT Support',
+    ],
+  },
+
+  {
+    id: 'security-data',
+    number: '06',
+    title: 'Security & Data',
+    description:
+      'Protecting your technology environment while connecting systems and turning data into useful business insights.',
+    icon: ShieldCheck,
+    capabilities: [
+      'Cybersecurity',
+      'Database Solutions',
+      'Data Analytics',
+      'Business Intelligence',
+      'System Integration',
+      'API Integration',
+    ],
   },
 ]
+
 
 export interface Feature {
   title: string
@@ -149,7 +156,8 @@ export interface Feature {
 export const whyFeatures: Feature[] = [
   {
     title: 'Innovation',
-    description: 'We turn ideas into practical digital products and experiences.',
+    description:
+      'We turn ideas into practical digital products and experiences.',
     icon: Lightbulb,
   },
   {
@@ -160,7 +168,8 @@ export const whyFeatures: Feature[] = [
   },
   {
     title: 'Scalability',
-    description: 'We create solutions with future growth and expansion in mind.',
+    description:
+      'We create solutions with future growth and expansion in mind.',
     icon: TrendingUp,
   },
   {
@@ -172,11 +181,14 @@ export const whyFeatures: Feature[] = [
 ]
 
 
+
 export const serviceOptions = [
-  'Website Development',
-  'Mobile App Development',
-  'Custom Software Development',
-  'AI & Business Automation',
+  'Digital Products',
+  'Software & Applications',
+  'AI & Automation',
+  'Cloud & Infrastructure',
+  'IT & Hardware',
+  'Security & Data',
   'Other',
 ]
 
