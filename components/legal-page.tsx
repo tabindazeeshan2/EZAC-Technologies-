@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
-import { Navbar } from '@/components/navbar'
-import { Footer } from '@/components/footer'
+
+
 
 export function LegalPage({
   title,
@@ -14,7 +14,7 @@ export function LegalPage({
 }) {
   return (
     <>
-      <Navbar />
+      
       <main className="mx-auto max-w-3xl px-4 pt-32 pb-24 sm:px-6 lg:px-8">
         <Link
           href="/"
@@ -29,7 +29,7 @@ export function LegalPage({
           {children}
         </div>
       </main>
-      <Footer />
+      
     </>
   )
 }

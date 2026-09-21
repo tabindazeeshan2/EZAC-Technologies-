@@ -1,10 +1,9 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
-import './globals.css'
-
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
+import './globals.css'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -16,12 +15,15 @@ const siteUrl = 'https://ezactechnologies.com'
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
+
   title: {
     default: 'EZAC Technologies | Building Smart Digital Solutions',
     template: '%s | EZAC Technologies',
   },
+
   description:
     'EZAC Technologies builds modern websites, mobile applications, custom software and AI-powered business automation solutions.',
+
   keywords: [
     'EZAC Technologies',
     'web development',
@@ -30,9 +32,11 @@ export const metadata: Metadata = {
     'AI automation',
     'digital solutions',
   ],
+
   alternates: {
     canonical: '/',
   },
+
   openGraph: {
     type: 'website',
     url: siteUrl,
@@ -49,6 +53,7 @@ export const metadata: Metadata = {
       },
     ],
   },
+
   twitter: {
     card: 'summary_large_image',
     title: 'EZAC Technologies | Building Smart Digital Solutions',
@@ -56,10 +61,12 @@ export const metadata: Metadata = {
       'EZAC Technologies builds modern websites, mobile applications, custom software and AI-powered business automation solutions.',
     images: ['/ezac-logo.jpeg'],
   },
+
   icons: {
     icon: '/ezac-logo.jpeg',
     apple: '/ezac-logo.jpeg',
   },
+
   generator: 'v0.app',
 }
 
@@ -76,9 +83,16 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} bg-background`}>
       <body className="font-sans antialiased">
-        <Navbar />
-        {children}
-        <Footer />
+        <div className="flex min-h-screen flex-col">
+          <Navbar />
+
+          <main className="flex-1">
+            {children}
+          </main>
+
+          <Footer />
+        </div>
+
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
