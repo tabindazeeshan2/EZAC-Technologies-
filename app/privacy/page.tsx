@@ -365,8 +365,38 @@ const policySections = [
 export default function PrivacyPage() {
   const [searchQuery, setSearchQuery] = useState('')
   const [activeSection, setActiveSection] = useState('info-collect')
+  const [pageReady, setPageReady] = useState(false)
   const clickTargetRef = useRef<string | null>(null)
   const animationFrameRef = useRef<number | null>(null)
+
+  // Prevent flash: solid background + block scroll restoration until ready
+  useEffect(() => {
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual'
+    }
+
+    document.documentElement.classList.add('privacy-page')
+    document.body.style.backgroundColor = '#020817'
+
+    let cancelled = false
+    const id = requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        if (!cancelled) {
+          setPageReady(true)
+        }
+      })
+    })
+
+    return () => {
+      cancelled = true
+      cancelAnimationFrame(id)
+      document.documentElement.classList.remove('privacy-page')
+      document.body.style.backgroundColor = ''
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'auto'
+      }
+    }
+  }, [])
 
   const filteredSections = useMemo(() => {
     if (!searchQuery.trim()) {
@@ -455,7 +485,11 @@ export default function PrivacyPage() {
 
     window.addEventListener('resize', handleScroll)
 
-    getCurrentSection()
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        getCurrentSection()
+      })
+    })
 
     return () => {
       window.removeEventListener('scroll', handleScroll)
@@ -489,313 +523,327 @@ export default function PrivacyPage() {
   }
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#020817] text-slate-200 antialiased selection:bg-sky-500/30 selection:text-white">
-      <div className="pointer-events-none fixed inset-0 -z-10">
-        <div className="absolute -left-40 top-0 h-[600px] w-[600px] rounded-full bg-sky-500/[0.045] blur-[160px]" />
-
-        <div className="absolute -right-48 top-[20%] h-[600px] w-[600px] rounded-full bg-cyan-400/[0.025] blur-[170px]" />
-
-        <div className="absolute -left-48 bottom-[10%] h-[500px] w-[500px] rounded-full bg-blue-500/[0.025] blur-[170px]" />
-
+    <>
+      {/* Full-screen opaque blocker – covers everything (including under transparent Navbar) until ready */}
+      {!pageReady && (
         <div
-          className="absolute inset-0 opacity-[0.018]"
-          style={{
-            backgroundImage:
-              'linear-gradient(rgba(56,189,248,0.5) 1px,transparent 1px),linear-gradient(90deg,rgba(56,189,248,0.5) 1px,transparent 1px)',
-            backgroundSize: '70px 70px',
-          }}
+          className="fixed inset-0 z-[100] bg-[#020817]"
+          aria-hidden="true"
         />
+      )}
 
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(2,8,23,0.35)_55%,rgba(2,8,23,0.9)_100%)]" />
-      </div>
+      <main
+        className={`relative min-h-screen bg-[#020817] text-slate-200 antialiased selection:bg-sky-500/30 selection:text-white transition-opacity duration-150 ${
+          pageReady ? 'opacity-100' : 'opacity-0'
+        }`}
+      >
+        <div className="pointer-events-none fixed inset-0 -z-10">
+          <div className="absolute -left-40 top-0 h-[600px] w-[600px] rounded-full bg-sky-500/[0.045] blur-[160px]" />
 
-      <section className="relative border-b border-white/[0.055]">
-        <div className="mx-auto max-w-7xl px-5 pb-16 pt-32 sm:px-8 sm:pb-20 sm:pt-40 lg:px-10">
-          <div className="max-w-4xl">
-            <div className="mb-7 flex items-center gap-3">
-              <span className="h-px w-9 bg-gradient-to-r from-sky-400 to-transparent" />
+          <div className="absolute -right-48 top-[20%] h-[600px] w-[600px] rounded-full bg-cyan-400/[0.025] blur-[170px]" />
 
-              <span className="font-mono text-[10px] font-medium uppercase tracking-[0.32em] text-sky-400">
-                Legal / Privacy
-              </span>
-            </div>
+          <div className="absolute -left-48 bottom-[10%] h-[500px] w-[500px] rounded-full bg-blue-500/[0.025] blur-[170px]" />
 
-            <h1 className="text-5xl font-semibold leading-[0.95] tracking-[-0.055em] text-white sm:text-6xl lg:text-[5.8rem]">
-              Your privacy
-              <span className="block bg-gradient-to-r from-[#5ec8ff] via-[#078cff] to-[#3ad4ff] bg-clip-text text-transparent">
-                matters to us.
-              </span>
-            </h1>
+          <div
+            className="absolute inset-0 opacity-[0.018]"
+            style={{
+              backgroundImage:
+                'linear-gradient(rgba(56,189,248,0.5) 1px,transparent 1px),linear-gradient(90deg,rgba(56,189,248,0.5) 1px,transparent 1px)',
+              backgroundSize: '70px 70px',
+            }}
+          />
 
-            <p className="mt-8 max-w-2xl text-base leading-8 text-slate-400 sm:text-lg">
-              This document outlines how EZAC Technologies manages, processes,
-              and protects personal information gathered through our services
-              and platforms.
-            </p>
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(2,8,23,0.35)_55%,rgba(2,8,23,0.9)_100%)]" />
+        </div>
 
-            <div className="mt-10 grid max-w-xl grid-cols-2 border-y border-white/[0.06] py-5 sm:grid-cols-3">
-              <div>
-                <span className="font-mono text-[8px] uppercase tracking-[0.28em] text-slate-600">
-                  Document
+        <section className="relative border-b border-white/[0.055]">
+          <div className="mx-auto max-w-7xl px-5 pb-16 pt-32 sm:px-8 sm:pb-20 sm:pt-40 lg:px-10">
+            <div className="max-w-4xl">
+              <div className="mb-7 flex items-center gap-3">
+                <span className="h-px w-9 bg-gradient-to-r from-sky-400 to-transparent" />
+
+                <span className="font-mono text-[10px] font-medium uppercase tracking-[0.32em] text-sky-400">
+                  Legal / Privacy
                 </span>
-
-                <p className="mt-2 text-xs text-slate-300">
-                  Privacy Policy
-                </p>
               </div>
 
-              <div className="border-l border-white/[0.06] pl-5">
-                <span className="font-mono text-[8px] uppercase tracking-[0.28em] text-slate-600">
-                  Effective
+              <h1 className="text-5xl font-semibold leading-[0.95] tracking-[-0.055em] text-white sm:text-6xl lg:text-[5.8rem]">
+                Your privacy
+                <span className="block bg-gradient-to-r from-[#5ec8ff] via-[#078cff] to-[#3ad4ff] bg-clip-text text-transparent">
+                  matters to us.
                 </span>
+              </h1>
 
-                <p className="mt-2 text-xs text-slate-300">
-                  August 15, 2026
-                </p>
-              </div>
+              <p className="mt-8 max-w-2xl text-base leading-8 text-slate-400 sm:text-lg">
+                This document outlines how EZAC Technologies manages, processes,
+                and protects personal information gathered through our services
+                and platforms.
+              </p>
 
-              <div className="mt-5 border-l-0 border-white/[0.06] pl-0 sm:mt-0 sm:border-l sm:pl-5">
-                <span className="font-mono text-[8px] uppercase tracking-[0.28em] text-slate-600">
-                  Read Time
-                </span>
+              <div className="mt-10 grid max-w-xl grid-cols-2 border-y border-white/[0.06] py-5 sm:grid-cols-3">
+                <div>
+                  <span className="font-mono text-[8px] uppercase tracking-[0.28em] text-slate-600">
+                    Document
+                  </span>
 
-                <p className="mt-2 text-xs text-slate-300">
-                  Approximately 4 mins
-                </p>
+                  <p className="mt-2 text-xs text-slate-300">
+                    Privacy Policy
+                  </p>
+                </div>
+
+                <div className="border-l border-white/[0.06] pl-5">
+                  <span className="font-mono text-[8px] uppercase tracking-[0.28em] text-slate-600">
+                    Effective
+                  </span>
+
+                  <p className="mt-2 text-xs text-slate-300">
+                    August 15, 2026
+                  </p>
+                </div>
+
+                <div className="mt-5 border-l-0 border-white/[0.06] pl-0 sm:mt-0 sm:border-l sm:pl-5">
+                  <span className="font-mono text-[8px] uppercase tracking-[0.28em] text-slate-600">
+                    Read Time
+                  </span>
+
+                  <p className="mt-2 text-xs text-slate-300">
+                    Approximately 4 mins
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="relative mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
-        <div className="grid gap-12 lg:grid-cols-[280px_1fr] lg:gap-16">
-          <aside className="lg:block">
-            <div className="sticky top-24">
-              <div className="mb-4 flex items-center gap-3">
-                <span className="h-px w-7 bg-sky-400/60" />
+        <section className="relative mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
+          <div className="grid gap-12 lg:grid-cols-[280px_1fr] lg:gap-16">
+            <aside className="lg:block">
+              <div className="sticky top-24">
+                <div className="mb-4 flex items-center gap-3">
+                  <span className="h-px w-7 bg-sky-400/60" />
 
-                <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-sky-400/80">
-                  Privacy
-                </span>
-              </div>
-
-              <div className="relative">
-                <Search
-                  size={15}
-                  strokeWidth={1.5}
-                  className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-600"
-                />
-
-                <input
-                  type="text"
-                  placeholder="Search policy topics..."
-                  value={searchQuery}
-                  onChange={(event) => setSearchQuery(event.target.value)}
-                  className="h-11 w-full rounded-xl border border-white/[0.07] bg-[#040b1b]/80 pl-10 pr-10 text-xs text-slate-300 outline-none backdrop-blur-xl transition-all placeholder:text-slate-600 focus:border-sky-400/30 focus:ring-1 focus:ring-sky-400/10"
-                />
-
-                {searchQuery && (
-                  <button
-                    type="button"
-                    onClick={() => setSearchQuery('')}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-600 transition-colors hover:text-white"
-                    aria-label="Clear search"
-                  >
-                    <X size={14} />
-                  </button>
-                )}
-              </div>
-
-              <div className="mt-5 overflow-hidden rounded-2xl border border-sky-900/40 bg-[#040b1b]/75 backdrop-blur-xl">
-                <div className="flex items-center justify-between border-b border-white/[0.06] px-4 py-4">
-                  <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-slate-500">
-                    Sections
-                  </span>
-
-                  <span className="font-mono text-[9px] text-sky-400/70">
-                    {filteredSections.length.toString().padStart(2, '0')}
+                  <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-sky-400/80">
+                    Privacy
                   </span>
                 </div>
 
-                <nav className="max-h-[calc(100vh-270px)] overflow-y-auto p-2">
-                  {filteredSections.map((section, index) => {
-                    const isActive = activeSection === section.id
+                <div className="relative">
+                  <Search
+                    size={15}
+                    strokeWidth={1.5}
+                    className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-600"
+                  />
 
-                    return (
-                      <a
-                        key={section.id}
-                        href={`#${section.id}`}
-                        onClick={(event) =>
-                          scrollToSection(event, section.id)
-                        }
-                        className={`group flex items-start gap-3 rounded-xl px-3 py-2.5 transition-all duration-300 ${
-                          isActive
-                            ? 'border border-sky-400/15 bg-sky-400/[0.06] text-sky-300'
-                            : 'border border-transparent text-slate-500 hover:bg-white/[0.025] hover:text-slate-300'
-                        }`}
-                      >
-                        <span
-                          className={`mt-0.5 w-5 shrink-0 font-mono text-[8px] ${
+                  <input
+                    type="text"
+                    placeholder="Search policy topics..."
+                    value={searchQuery}
+                    onChange={(event) => setSearchQuery(event.target.value)}
+                    className="h-11 w-full rounded-xl border border-white/[0.07] bg-[#040b1b]/80 pl-10 pr-10 text-xs text-slate-300 outline-none backdrop-blur-xl transition-all placeholder:text-slate-600 focus:border-sky-400/30 focus:ring-1 focus:ring-sky-400/10"
+                  />
+
+                  {searchQuery && (
+                    <button
+                      type="button"
+                      onClick={() => setSearchQuery('')}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-600 transition-colors hover:text-white"
+                      aria-label="Clear search"
+                    >
+                      <X size={14} />
+                    </button>
+                  )}
+                </div>
+
+                <div className="mt-5 overflow-hidden rounded-2xl border border-sky-900/40 bg-[#040b1b]/75 backdrop-blur-xl">
+                  <div className="flex items-center justify-between border-b border-white/[0.06] px-4 py-4">
+                    <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-slate-500">
+                      Sections
+                    </span>
+
+                    <span className="font-mono text-[9px] text-sky-400/70">
+                      {filteredSections.length.toString().padStart(2, '0')}
+                    </span>
+                  </div>
+
+                  <nav className="max-h-[calc(100vh-270px)] overflow-y-auto p-2">
+                    {filteredSections.map((section, index) => {
+                      const isActive = activeSection === section.id
+
+                      return (
+                        <a
+                          key={section.id}
+                          href={`#${section.id}`}
+                          onClick={(event) =>
+                            scrollToSection(event, section.id)
+                          }
+                          className={`group flex items-start gap-3 rounded-xl px-3 py-2.5 transition-all duration-300 ${
                             isActive
-                              ? 'text-sky-400'
-                              : 'text-slate-700'
+                              ? 'border border-sky-400/15 bg-sky-400/[0.06] text-sky-300'
+                              : 'border border-transparent text-slate-500 hover:bg-white/[0.025] hover:text-slate-300'
                           }`}
                         >
+                          <span
+                            className={`mt-0.5 w-5 shrink-0 font-mono text-[8px] ${
+                              isActive
+                                ? 'text-sky-400'
+                                : 'text-slate-700'
+                            }`}
+                          >
+                            {(index + 1).toString().padStart(2, '0')}
+                          </span>
+
+                          <span className="text-[11px] leading-5">
+                            {section.title}
+                          </span>
+                        </a>
+                      )
+                    })}
+
+                    {filteredSections.length === 0 && (
+                      <div className="px-4 py-8 text-center">
+                        <Search
+                          size={20}
+                          className="mx-auto text-slate-700"
+                        />
+
+                        <p className="mt-3 text-xs text-slate-600">
+                          No matching topics found.
+                        </p>
+                      </div>
+                    )}
+                  </nav>
+                </div>
+              </div>
+            </aside>
+
+            <div className="min-w-0">
+              <div className="mb-10 overflow-hidden rounded-3xl border border-sky-900/40 bg-[#040b1b]/75 p-6 backdrop-blur-xl sm:p-8">
+                <div className="flex items-start gap-5">
+                  <div className="flex size-11 shrink-0 items-center justify-center rounded-xl border border-sky-400/15 bg-sky-400/[0.05]">
+                    <FileText
+                      size={20}
+                      strokeWidth={1.4}
+                      className="text-sky-400"
+                    />
+                  </div>
+
+                  <div>
+                    <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-sky-400/80">
+                      Privacy Overview
+                    </span>
+
+                    <h2 className="mt-2 text-xl font-semibold tracking-tight text-white">
+                      How we handle your information
+                    </h2>
+
+                    <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-500">
+                      This policy explains the information we collect, how it is
+                      used, how it may be shared, and the rights available to
+                      individuals regarding their personal information.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-5">
+                {filteredSections.map((section, index) => (
+                  <article
+                    key={section.id}
+                    id={section.id}
+                    className="scroll-mt-24 overflow-hidden rounded-3xl border border-sky-900/30 bg-[#040b1b]/70 backdrop-blur-xl transition-all duration-300 hover:border-sky-900/55"
+                  >
+                    <div className="border-b border-white/[0.055] px-6 py-6 sm:px-8">
+                      <div className="flex items-center gap-4">
+                        <span className="shrink-0 font-mono text-sm tracking-[0.15em] text-sky-400/70">
                           {(index + 1).toString().padStart(2, '0')}
                         </span>
 
-                        <span className="text-[11px] leading-5">
+                        <h2 className="text-xl font-semibold tracking-[-0.025em] text-white sm:text-2xl">
                           {section.title}
-                        </span>
-                      </a>
-                    )
-                  })}
-
-                  {filteredSections.length === 0 && (
-                    <div className="px-4 py-8 text-center">
-                      <Search
-                        size={20}
-                        className="mx-auto text-slate-700"
-                      />
-
-                      <p className="mt-3 text-xs text-slate-600">
-                        No matching topics found.
-                      </p>
+                        </h2>
+                      </div>
                     </div>
-                  )}
-                </nav>
+
+                    <div className="px-6 py-7 sm:px-8 sm:py-8">
+                      {section.content}
+                    </div>
+                  </article>
+                ))}
+
+                {filteredSections.length === 0 && (
+                  <div className="rounded-3xl border border-white/[0.06] bg-[#040b1b]/70 px-6 py-16 text-center">
+                    <Search
+                      size={30}
+                      strokeWidth={1.3}
+                      className="mx-auto text-slate-700"
+                    />
+
+                    <h2 className="mt-5 text-lg font-semibold text-white">
+                      No policy sections found
+                    </h2>
+
+                    <p className="mx-auto mt-2 max-w-sm text-sm leading-6 text-slate-500">
+                      Try searching for another privacy topic.
+                    </p>
+
+                    <button
+                      type="button"
+                      onClick={() => setSearchQuery('')}
+                      className="mt-6 inline-flex items-center gap-2 rounded-xl border border-white/[0.08] bg-white/[0.025] px-4 py-2.5 text-xs font-medium text-slate-300 transition-colors hover:border-sky-400/25 hover:text-white"
+                    >
+                      Clear Search
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
-          </aside>
+          </div>
+        </section>
 
-          <div className="min-w-0">
-            <div className="mb-10 overflow-hidden rounded-3xl border border-sky-900/40 bg-[#040b1b]/75 p-6 backdrop-blur-xl sm:p-8">
-              <div className="flex items-start gap-5">
-                <div className="flex size-11 shrink-0 items-center justify-center rounded-xl border border-sky-400/15 bg-sky-400/[0.05]">
-                  <FileText
-                    size={20}
-                    strokeWidth={1.4}
-                    className="text-sky-400"
-                  />
-                </div>
+        <section className="relative mx-auto max-w-7xl px-5 pb-24 sm:px-8 lg:px-10 lg:pb-32">
+          <div className="relative overflow-hidden rounded-3xl border border-sky-900/40 bg-[#040b1b]/80 p-8 text-center shadow-[0_30px_100px_-60px_rgba(56,189,248,0.35)] backdrop-blur-xl sm:p-12">
+            <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-sky-400/[0.045] blur-[100px]" />
 
-                <div>
-                  <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-sky-400/80">
-                    Privacy Overview
-                  </span>
+            <div className="absolute -left-24 bottom-[-120px] h-72 w-72 rounded-full bg-blue-500/[0.035] blur-[100px]" />
 
-                  <h2 className="mt-2 text-xl font-semibold tracking-tight text-white">
-                    How we handle your information
-                  </h2>
-
-                  <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-500">
-                    This policy explains the information we collect, how it is
-                    used, how it may be shared, and the rights available to
-                    individuals regarding their personal information.
-                  </p>
-                </div>
+            <div className="relative">
+              <div className="mx-auto flex size-12 items-center justify-center rounded-xl border border-sky-400/15 bg-sky-400/[0.05]">
+                <LockKeyhole
+                  size={21}
+                  strokeWidth={1.4}
+                  className="text-sky-400"
+                />
               </div>
-            </div>
 
-            <div className="space-y-5">
-              {filteredSections.map((section, index) => (
-                <article
-                  key={section.id}
-                  id={section.id}
-                  className="scroll-mt-24 overflow-hidden rounded-3xl border border-sky-900/30 bg-[#040b1b]/70 backdrop-blur-xl transition-all duration-300 hover:border-sky-900/55"
-                >
-                  <div className="border-b border-white/[0.055] px-6 py-6 sm:px-8">
-                    <div className="flex items-center gap-4">
-                      <span className="shrink-0 font-mono text-sm tracking-[0.15em] text-sky-400/70">
-                        {(index + 1).toString().padStart(2, '0')}
-                      </span>
+              <div className="mt-6 font-mono text-[9px] uppercase tracking-[0.3em] text-sky-400/80">
+                Privacy / Support
+              </div>
 
-                      <h2 className="text-xl font-semibold tracking-[-0.025em] text-white sm:text-2xl">
-                        {section.title}
-                      </h2>
-                    </div>
-                  </div>
+              <h2 className="mx-auto mt-4 max-w-2xl text-3xl font-semibold tracking-[-0.04em] text-white sm:text-4xl">
+                Have questions about your information?
+              </h2>
 
-                  <div className="px-6 py-7 sm:px-8 sm:py-8">
-                    {section.content}
-                  </div>
-                </article>
-              ))}
+              <p className="mx-auto mt-4 max-w-xl text-sm leading-7 text-slate-500">
+                If you have questions about this Privacy Policy or would like to
+                make a data request, contact our team directly.
+              </p>
 
-              {filteredSections.length === 0 && (
-                <div className="rounded-3xl border border-white/[0.06] bg-[#040b1b]/70 px-6 py-16 text-center">
-                  <Search
-                    size={30}
-                    strokeWidth={1.3}
-                    className="mx-auto text-slate-700"
-                  />
+              <a
+                href="/#contact"
+                className="group mt-7 inline-flex h-11 items-center justify-center rounded-xl bg-[#078cff] px-6 text-[13px] font-semibold text-white shadow-[0_8px_30px_-8px_rgba(0,140,255,0.3)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#159cff] hover:shadow-[0_10px_35px_-8px_rgba(0,140,255,0.45)]"
+              >
+                Contact Legal Team
 
-                  <h2 className="mt-5 text-lg font-semibold text-white">
-                    No policy sections found
-                  </h2>
-
-                  <p className="mx-auto mt-2 max-w-sm text-sm leading-6 text-slate-500">
-                    Try searching for another privacy topic.
-                  </p>
-
-                  <button
-                    type="button"
-                    onClick={() => setSearchQuery('')}
-                    className="mt-6 inline-flex items-center gap-2 rounded-xl border border-white/[0.08] bg-white/[0.025] px-4 py-2.5 text-xs font-medium text-slate-300 transition-colors hover:border-sky-400/25 hover:text-white"
-                  >
-                    Clear Search
-                  </button>
-                </div>
-              )}
+                <ArrowRight
+                  size={14}
+                  strokeWidth={2.2}
+                  className="ml-2 transition-transform duration-300 group-hover:translate-x-1"
+                />
+              </a>
             </div>
           </div>
-        </div>
-      </section>
-
-      <section className="relative mx-auto max-w-7xl px-5 pb-24 sm:px-8 lg:px-10 lg:pb-32">
-        <div className="relative overflow-hidden rounded-3xl border border-sky-900/40 bg-[#040b1b]/80 p-8 text-center shadow-[0_30px_100px_-60px_rgba(56,189,248,0.35)] backdrop-blur-xl sm:p-12">
-          <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-sky-400/[0.045] blur-[100px]" />
-
-          <div className="absolute -left-24 bottom-[-120px] h-72 w-72 rounded-full bg-blue-500/[0.035] blur-[100px]" />
-
-          <div className="relative">
-            <div className="mx-auto flex size-12 items-center justify-center rounded-xl border border-sky-400/15 bg-sky-400/[0.05]">
-              <LockKeyhole
-                size={21}
-                strokeWidth={1.4}
-                className="text-sky-400"
-              />
-            </div>
-
-            <div className="mt-6 font-mono text-[9px] uppercase tracking-[0.3em] text-sky-400/80">
-              Privacy / Support
-            </div>
-
-            <h2 className="mx-auto mt-4 max-w-2xl text-3xl font-semibold tracking-[-0.04em] text-white sm:text-4xl">
-              Have questions about your information?
-            </h2>
-
-            <p className="mx-auto mt-4 max-w-xl text-sm leading-7 text-slate-500">
-              If you have questions about this Privacy Policy or would like to
-              make a data request, contact our team directly.
-            </p>
-
-            <a
-              href="/#contact"
-              className="group mt-7 inline-flex h-11 items-center justify-center rounded-xl bg-[#078cff] px-6 text-[13px] font-semibold text-white shadow-[0_8px_30px_-8px_rgba(0,140,255,0.3)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#159cff] hover:shadow-[0_10px_35px_-8px_rgba(0,140,255,0.45)]"
-            >
-              Contact Legal Team
-
-              <ArrowRight
-                size={14}
-                strokeWidth={2.2}
-                className="ml-2 transition-transform duration-300 group-hover:translate-x-1"
-              />
-            </a>
-          </div>
-        </div>
-      </section>
-    </main>
+        </section>
+      </main>
+    </>
   )
 }
