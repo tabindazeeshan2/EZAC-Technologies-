@@ -237,18 +237,7 @@ export function About() {
                 {/* Image overlay */}
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#020817]/50 via-transparent to-transparent" />
 
-                {/* Corner label */}
-                <div className="absolute left-6 top-6 flex items-center gap-3">
-                  <span className="font-mono text-[10px] tracking-[0.3em] text-sky-400">
-                    01
-                  </span>
-
-                  <span className="h-px w-8 bg-sky-400/40" />
-
-                  <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-slate-500">
-                    Digital Transformation
-                  </span>
-                </div>
+                
               </div>
 
               
