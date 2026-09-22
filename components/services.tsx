@@ -18,11 +18,20 @@ import {
   Users,
   BarChart3,
   Workflow,
+  LucideIcon,
 } from 'lucide-react'
 
 import { SectionHeading } from '@/components/section-heading'
 import { Reveal } from '@/components/reveal'
-
+export interface Service {
+  id: string
+  slug: string
+  number: string
+  title: string
+  description: string
+  capabilities: string[]
+  icon: LucideIcon
+}
 const services = [
   {
     number: '01',

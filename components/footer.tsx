@@ -91,24 +91,24 @@ export function Footer() {
           </div>
 
           {/* Services */}
-          <div>
-            <h3 className="text-sm font-semibold text-foreground">
-              Services
-            </h3>
+<div>
+  <h3 className="text-sm font-semibold text-foreground">
+    Services
+  </h3>
 
-            <ul className="mt-4 space-y-3">
-              {services.map((service) => (
-                <li key={service.id}>
-                  <Link
-                    href={`/#${service.id}`}
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    {service.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+  <ul className="mt-4 space-y-3">
+    {services.map((service) => (
+      <li key={service.id}>
+        <Link
+          href={`/services/${service.slug}`}
+          className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+        >
+          {service.title}
+        </Link>
+      </li>
+    ))}
+  </ul>
+</div>
 
           {/* Company */}
           <div>

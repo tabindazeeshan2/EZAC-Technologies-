@@ -35,6 +35,7 @@ export const navLinks = [
 
 export interface Service {
   id: string
+  slug: string
   number: string
   title: string
   description: string
@@ -46,6 +47,7 @@ export const services: Service[] = [
   {
     id: 'digital-products',
     number: '01',
+    slug: 'digital-products',
     title: 'Digital Products',
     description:
       'Modern digital experiences that help businesses build their online presence and connect with their customers.',
@@ -64,6 +66,7 @@ export const services: Service[] = [
     id: 'software-applications',
     number: '02',
     title: 'Software & Applications',
+    slug: 'software-applications',
     description:
       'Purpose-built software and applications designed around your workflows, users and business requirements.',
     icon: Code2,
@@ -81,6 +84,7 @@ export const services: Service[] = [
     id: 'ai-automation',
     number: '03',
     title: 'AI & Automation',
+    slug: 'ai-and-automation',
     description:
       'Intelligent solutions that automate repetitive work, improve efficiency and create smarter business experiences.',
     icon: Bot,
@@ -98,6 +102,7 @@ export const services: Service[] = [
     id: 'cloud-infrastructure',
     number: '04',
     title: 'Cloud & Infrastructure',
+    slug: 'cloud-and-infrastructure',
     description:
       'Reliable technology infrastructure for hosting, deploying, scaling and maintaining your digital solutions.',
     icon: Cloud,
@@ -115,6 +120,7 @@ export const services: Service[] = [
     id: 'it-hardware',
     number: '05',
     title: 'IT & Hardware',
+    slug: 'it-and-hardware',
     description:
       'Technology hardware, networking and IT infrastructure that keeps your organization connected and productive.',
     icon: Server,
@@ -132,6 +138,7 @@ export const services: Service[] = [
     id: 'security-data',
     number: '06',
     title: 'Security & Data',
+    slug: 'security-and-data',
     description:
       'Protecting your technology environment while connecting systems and turning data into useful business insights.',
     icon: ShieldCheck,
