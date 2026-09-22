@@ -661,24 +661,18 @@ export default function TermsPage() {
                   id={section.id}
                   className="scroll-mt-24 overflow-hidden rounded-3xl border border-sky-900/30 bg-[#040b1b]/70 backdrop-blur-xl transition-all duration-300 hover:border-sky-900/55"
                 >
-                  {/* Section header */}
+                 {/* Section header */}
+<div className="border-b border-white/[0.055] px-6 py-6 sm:px-8">
+  <div className="flex items-center gap-3">
+    <span className="font-mono text-sm tracking-[0.15em] text-sky-400/70">
+      {(index + 1).toString().padStart(2, '0')}
+    </span>
 
-                  <div className="border-b border-white/[0.055] px-6 py-6 sm:px-8">
-                    <div className="flex items-start gap-4">
-                      <span className="font-mono text-[10px] tracking-[0.15em] text-sky-400/70">
-                        {(index + 1).toString().padStart(2, '0')}
-                      </span>
-
-                      <div>
-                        
-
-                        <h2 className="mt-1 text-xl font-semibold tracking-[-0.025em] text-white sm:text-2xl">
-                          {section.title}
-                        </h2>
-                      </div>
-                    </div>
-                  </div>
-
+    <h2 className="text-xl font-semibold tracking-[-0.025em] text-white sm:text-2xl">
+      {section.title}
+    </h2>
+  </div>
+</div>
                   {/* Section content */}
 
                   <div className="px-6 py-7 sm:px-8 sm:py-8">
