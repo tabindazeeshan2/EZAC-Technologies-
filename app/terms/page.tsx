@@ -1,9 +1,8 @@
 'use client'
 
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import {
   ArrowRight,
-  Check,
   FileText,
   LockKeyhole,
   Mail,
@@ -11,55 +10,6 @@ import {
   ShieldCheck,
   X,
 } from 'lucide-react'
-
-function Logo({
-  className = '',
-  showWordmark = true,
-}: {
-  className?: string
-  showWordmark?: boolean
-}) {
-  const [imgError, setImgError] = useState(false)
-
-  return (
-    <a
-      href="/"
-      aria-label="EZAC Technologies home"
-      className={`group flex items-center gap-2.5 ${className}`}
-    >
-      <span className="relative inline-flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-blue-950/80 ring-1 ring-blue-500/30 transition-transform duration-300 group-hover:scale-105">
-        {!imgError ? (
-          <img
-            src="/ezac-logo.jpeg"
-            alt="EZAC Technologies logo"
-            className="h-full w-full object-cover"
-            onError={() => setImgError(true)}
-          />
-        ) : (
-          <span className="text-xs font-black tracking-tighter text-blue-400">
-            EZ
-          </span>
-        )}
-      </span>
-
-      {showWordmark && (
-        <span className="text-base font-bold leading-none tracking-tight text-white">
-          EZAC
-          <span className="ml-1 font-medium text-slate-400">
-            Technologies
-          </span>
-        </span>
-      )}
-    </a>
-  )
-}
-
-const navLinks = [
-  { label: 'Home', href: '/' },
-  { label: 'About', href: '/#about' },
-  { label: 'Services', href: '/#services' },
-  { label: 'Contact', href: '/#contact' },
-]
 
 const termsSections = [
   {
@@ -111,6 +61,7 @@ const termsSections = [
               className="group/item flex items-center gap-3 rounded-xl border border-white/[0.055] bg-white/[0.018] p-4 transition-colors duration-300 hover:border-sky-400/20 hover:bg-sky-400/[0.025]"
             >
               <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-sky-400/80 shadow-[0_0_8px_rgba(56,189,248,0.4)]" />
+
               <span className="text-sm text-slate-400 transition-colors group-hover/item:text-slate-300">
                 {item}
               </span>
@@ -338,7 +289,11 @@ const termsSections = [
         <div className="relative flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <div className="flex items-center gap-2">
-              <Mail size={16} strokeWidth={1.5} className="text-sky-400" />
+              <Mail
+                size={16}
+                strokeWidth={1.5}
+                className="text-sky-400"
+              />
 
               <p className="text-sm font-semibold text-white">
                 Questions regarding our Terms of Service?
@@ -355,6 +310,7 @@ const termsSections = [
             className="group inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-[#078cff] px-5 py-3 text-[13px] font-semibold text-white shadow-[0_8px_30px_-8px_rgba(0,140,255,0.3)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#159cff] hover:shadow-[0_10px_35px_-8px_rgba(0,140,255,0.45)]"
           >
             Contact Legal Team
+
             <ArrowRight
               size={14}
               strokeWidth={2.2}
@@ -370,9 +326,12 @@ const termsSections = [
 export default function TermsPage() {
   const [searchQuery, setSearchQuery] = useState('')
   const [activeSection, setActiveSection] = useState('about-terms')
+  const clickedSection = useRef<string | null>(null)
 
   const filteredSections = useMemo(() => {
-    if (!searchQuery.trim()) return termsSections
+    if (!searchQuery.trim()) {
+      return termsSections
+    }
 
     const query = searchQuery.toLowerCase()
 
@@ -384,28 +343,56 @@ export default function TermsPage() {
   }, [searchQuery])
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id)
+    const updateActiveSection = () => {
+      const scrollPosition = window.scrollY + 150
+      const clickedId = clickedSection.current
+
+      if (clickedId) {
+        const clickedElement = document.getElementById(clickedId)
+
+        if (clickedElement) {
+          const clickedTop =
+            clickedElement.getBoundingClientRect().top + window.scrollY
+
+          if (window.scrollY < clickedTop - 150) {
+            return
           }
-        })
-      },
-      {
-        rootMargin: '-20% 0px -65% 0px',
-      }
-    )
 
-    termsSections.forEach((section) => {
-      const element = document.getElementById(section.id)
-
-      if (element) {
-        observer.observe(element)
+          clickedSection.current = null
+        } else {
+          clickedSection.current = null
+        }
       }
+
+      let currentSection = termsSections[0].id
+
+      for (const section of termsSections) {
+        const element = document.getElementById(section.id)
+
+        if (!element) continue
+
+        const sectionTop =
+          element.getBoundingClientRect().top + window.scrollY
+
+        if (sectionTop <= scrollPosition) {
+          currentSection = section.id
+        } else {
+          break
+        }
+      }
+
+      setActiveSection(currentSection)
+    }
+
+    window.addEventListener('scroll', updateActiveSection, {
+      passive: true,
     })
 
-    return () => observer.disconnect()
+    updateActiveSection()
+
+    return () => {
+      window.removeEventListener('scroll', updateActiveSection)
+    }
   }, [])
 
   const scrollToSection = (
@@ -416,22 +403,19 @@ export default function TermsPage() {
 
     const element = document.getElementById(id)
 
-    if (element) {
-      element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      })
+    if (!element) return
 
-      setActiveSection(id)
-    }
+    clickedSection.current = id
+    setActiveSection(id)
+
+    element.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    })
   }
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#020817] text-slate-200 antialiased selection:bg-sky-500/30 selection:text-white">
-      {/* =========================================================
-          BACKGROUND
-      ========================================================= */}
-
       <div className="pointer-events-none fixed inset-0 -z-10">
         <div className="absolute -left-40 top-0 h-[600px] w-[600px] rounded-full bg-sky-500/[0.045] blur-[160px]" />
 
@@ -451,8 +435,6 @@ export default function TermsPage() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(2,8,23,0.35)_55%,rgba(2,8,23,0.9)_100%)]" />
       </div>
 
-      
-
       <section className="relative border-b border-white/[0.055]">
         <div className="mx-auto max-w-7xl px-5 pb-16 pt-32 sm:px-8 sm:pb-20 sm:pt-40 lg:px-10">
           <div className="max-w-4xl">
@@ -466,6 +448,7 @@ export default function TermsPage() {
 
             <h1 className="text-5xl font-semibold leading-[0.95] tracking-[-0.055em] text-white sm:text-6xl lg:text-[5.8rem]">
               Clear terms.
+
               <span className="block bg-gradient-to-r from-[#5ec8ff] via-[#078cff] to-[#3ad4ff] bg-clip-text text-transparent">
                 Fair use.
               </span>
@@ -511,16 +494,8 @@ export default function TermsPage() {
         </div>
       </section>
 
-      {/* =========================================================
-          MAIN CONTENT
-      ========================================================= */}
-
       <section className="relative mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
         <div className="grid gap-12 lg:grid-cols-[280px_1fr] lg:gap-16">
-          {/* =====================================================
-              SIDEBAR
-          ===================================================== */}
-
           <aside className="lg:block">
             <div className="sticky top-24">
               <div className="mb-4 flex items-center gap-3">
@@ -530,8 +505,6 @@ export default function TermsPage() {
                   Terms
                 </span>
               </div>
-
-              {/* Search */}
 
               <div className="relative">
                 <Search
@@ -560,8 +533,6 @@ export default function TermsPage() {
                 )}
               </div>
 
-              {/* TOC */}
-
               <div className="mt-5 overflow-hidden rounded-2xl border border-sky-900/40 bg-[#040b1b]/75 backdrop-blur-xl">
                 <div className="flex items-center justify-between border-b border-white/[0.06] px-4 py-4">
                   <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-slate-500">
@@ -581,7 +552,9 @@ export default function TermsPage() {
                       <a
                         key={section.id}
                         href={`#${section.id}`}
-                        onClick={(event) => scrollToSection(event, section.id)}
+                        onClick={(event) =>
+                          scrollToSection(event, section.id)
+                        }
                         className={`group flex items-start gap-3 rounded-xl px-3 py-2.5 transition-all duration-300 ${
                           isActive
                             ? 'border border-sky-400/15 bg-sky-400/[0.06] text-sky-300'
@@ -605,7 +578,10 @@ export default function TermsPage() {
 
                   {filteredSections.length === 0 && (
                     <div className="px-4 py-8 text-center">
-                      <Search size={20} className="mx-auto text-slate-700" />
+                      <Search
+                        size={20}
+                        className="mx-auto text-slate-700"
+                      />
 
                       <p className="mt-3 text-xs text-slate-600">
                         No matching topics found.
@@ -617,11 +593,7 @@ export default function TermsPage() {
             </div>
           </aside>
 
-          
-
           <div className="min-w-0">
-            {/* Overview */}
-
             <div className="mb-10 overflow-hidden rounded-3xl border border-sky-900/40 bg-[#040b1b]/75 p-6 backdrop-blur-xl sm:p-8">
               <div className="flex items-start gap-5">
                 <div className="flex size-11 shrink-0 items-center justify-center rounded-xl border border-sky-400/15 bg-sky-400/[0.05]">
@@ -652,8 +624,6 @@ export default function TermsPage() {
               </div>
             </div>
 
-            {/* Sections */}
-
             <div className="space-y-5">
               {filteredSections.map((section, index) => (
                 <article
@@ -661,19 +631,17 @@ export default function TermsPage() {
                   id={section.id}
                   className="scroll-mt-24 overflow-hidden rounded-3xl border border-sky-900/30 bg-[#040b1b]/70 backdrop-blur-xl transition-all duration-300 hover:border-sky-900/55"
                 >
-                 {/* Section header */}
-<div className="border-b border-white/[0.055] px-6 py-6 sm:px-8">
-  <div className="flex items-center gap-3">
-    <span className="font-mono text-sm tracking-[0.15em] text-sky-400/70">
-      {(index + 1).toString().padStart(2, '0')}
-    </span>
+                  <div className="border-b border-white/[0.055] px-6 py-6 sm:px-8">
+                    <div className="flex items-center gap-3">
+                      <span className="font-mono text-sm tracking-[0.15em] text-sky-400/70">
+                        {(index + 1).toString().padStart(2, '0')}
+                      </span>
 
-    <h2 className="text-xl font-semibold tracking-[-0.025em] text-white sm:text-2xl">
-      {section.title}
-    </h2>
-  </div>
-</div>
-                  {/* Section content */}
+                      <h2 className="text-xl font-semibold tracking-[-0.025em] text-white sm:text-2xl">
+                        {section.title}
+                      </h2>
+                    </div>
+                  </div>
 
                   <div className="px-6 py-7 sm:px-8 sm:py-8">
                     {section.content}
@@ -711,8 +679,6 @@ export default function TermsPage() {
         </div>
       </section>
 
-      
-
       <section className="relative mx-auto max-w-7xl px-5 pb-24 sm:px-8 lg:px-10 lg:pb-32">
         <div className="relative overflow-hidden rounded-3xl border border-sky-900/40 bg-[#040b1b]/80 p-8 text-center shadow-[0_30px_100px_-60px_rgba(56,189,248,0.35)] backdrop-blur-xl sm:p-12">
           <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-sky-400/[0.045] blur-[100px]" />
@@ -746,6 +712,7 @@ export default function TermsPage() {
               className="group mt-7 inline-flex h-11 items-center justify-center rounded-xl bg-[#078cff] px-6 text-[13px] font-semibold text-white shadow-[0_8px_30px_-8px_rgba(0,140,255,0.3)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#159cff] hover:shadow-[0_10px_35px_-8px_rgba(0,140,255,0.45)]"
             >
               Contact Legal Team
+
               <ArrowRight
                 size={14}
                 strokeWidth={2.2}
