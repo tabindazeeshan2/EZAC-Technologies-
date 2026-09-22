@@ -1,6 +1,18 @@
 'use client'
 
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
+import {
+  ArrowRight,
+  CalendarDays,
+  Check,
+  Clock3,
+  FileText,
+  LockKeyhole,
+  Mail,
+  Search,
+  ShieldCheck,
+  X,
+} from 'lucide-react'
 
 function Logo({
   className = '',
@@ -15,9 +27,9 @@ function Logo({
     <a
       href="/"
       aria-label="EZAC Technologies home"
-      className={`flex items-center gap-2.5 group ${className}`}
+      className={`group flex items-center gap-2.5 ${className}`}
     >
-      <span className="relative inline-flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-blue-950/80 ring-1 ring-blue-500/30 transition-transform group-hover:scale-105">
+      <span className="relative inline-flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-blue-950/80 ring-1 ring-blue-500/30 transition-transform duration-300 group-hover:scale-105">
         {!imgError ? (
           <img
             src="/ezac-logo.jpeg"
@@ -26,13 +38,18 @@ function Logo({
             onError={() => setImgError(true)}
           />
         ) : (
-          <span className="text-xs font-black tracking-tighter text-blue-400">EZ</span>
+          <span className="text-xs font-black tracking-tighter text-blue-400">
+            EZ
+          </span>
         )}
       </span>
+
       {showWordmark && (
         <span className="text-base font-bold leading-none tracking-tight text-white">
           EZAC
-          <span className="ml-1 font-medium text-slate-400">Technologies</span>
+          <span className="ml-1 font-medium text-slate-400">
+            Technologies
+          </span>
         </span>
       )}
     </a>
@@ -52,11 +69,17 @@ const policySections = [
     title: 'Information We Collect',
     content: (
       <>
-        <p className="text-slate-300 leading-relaxed mb-4">
-          We may collect information that you voluntarily provide when you interact with our website, contact us, request information, or inquire about our services.
+        <p className="text-sm leading-7 text-slate-400 sm:text-[15px]">
+          We may collect information that you voluntarily provide when you
+          interact with our website, contact us, request information, or
+          inquire about our services.
         </p>
-        <p className="text-sm font-semibold text-slate-200 mb-3">This information may include:</p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+
+        <p className="mt-6 text-xs font-semibold uppercase tracking-[0.2em] text-slate-300">
+          This information may include
+        </p>
+
+        <div className="mt-4 grid gap-3 sm:grid-cols-2">
           {[
             'Your full name and title',
             'Email address and contact details',
@@ -64,26 +87,38 @@ const policySections = [
             'Direct phone number (if provided)',
             'Project or service requirements',
             'Any additional context in your communications',
-          ].map((item, index) => (
-            <div key={index} className="flex items-center gap-3 rounded-lg border border-slate-800 bg-[#0d1527]/70 p-3 text-sm text-slate-300">
-              <span className="size-2 rounded-full bg-blue-400 shrink-0" />
-              <span>{item}</span>
+          ].map((item) => (
+            <div
+              key={item}
+              className="group/item flex items-center gap-3 rounded-xl border border-white/[0.055] bg-white/[0.018] p-4 transition-colors duration-300 hover:border-sky-400/20 hover:bg-sky-400/[0.025]"
+            >
+              <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-sky-400/80 shadow-[0_0_8px_rgba(56,189,248,0.4)]" />
+              <span className="text-sm text-slate-400 transition-colors group-hover/item:text-slate-300">
+                {item}
+              </span>
             </div>
           ))}
         </div>
       </>
     ),
   },
+
   {
     id: 'auto-collect',
     title: 'Information Collected Automatically',
     content: (
       <>
-        <p className="text-slate-300 leading-relaxed mb-4">
-          When you visit our website, certain technical information may be collected automatically by our servers or integrated tools to ensure site reliability and security.
+        <p className="text-sm leading-7 text-slate-400 sm:text-[15px]">
+          When you visit our website, certain technical information may be
+          collected automatically by our servers or integrated tools to ensure
+          site reliability and security.
         </p>
-        <p className="text-sm font-semibold text-slate-200 mb-3">Technical data parameters:</p>
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 mb-4">
+
+        <p className="mt-6 text-xs font-semibold uppercase tracking-[0.2em] text-slate-300">
+          Technical data parameters
+        </p>
+
+        <div className="mt-4 grid grid-cols-2 gap-2.5 sm:grid-cols-3">
           {[
             'IP address',
             'Browser & version',
@@ -91,27 +126,36 @@ const policySections = [
             'Operating system',
             'Page navigation path',
             'Session timestamps',
-          ].map((tech, idx) => (
-            <div key={idx} className="rounded-lg border border-slate-800 bg-[#09101f] p-2.5 text-center text-xs font-mono text-blue-300">
+          ].map((tech) => (
+            <div
+              key={tech}
+              className="rounded-xl border border-white/[0.055] bg-[#030a18] px-3 py-3 text-center font-mono text-[10px] uppercase tracking-wider text-sky-400/70"
+            >
               {tech}
             </div>
           ))}
         </div>
-        <p className="text-sm text-slate-400 leading-relaxed">
-          This data is aggregated to evaluate system load, protect infrastructure against automated attacks, diagnose technical anomalies, and optimize overall site performance.
+
+        <p className="mt-5 text-sm leading-7 text-slate-500">
+          This data is aggregated to evaluate system load, protect
+          infrastructure against automated attacks, diagnose technical
+          anomalies, and optimize overall site performance.
         </p>
       </>
     ),
   },
+
   {
     id: 'how-we-use',
     title: 'How We Use Your Information',
     content: (
       <>
-        <p className="text-slate-300 leading-relaxed mb-4">
-          EZAC Technologies utilizes collected information solely for operational and strategic business purposes, including:
+        <p className="text-sm leading-7 text-slate-400 sm:text-[15px]">
+          EZAC Technologies utilizes collected information solely for
+          operational and strategic business purposes, including:
         </p>
-        <ul className="space-y-3">
+
+        <div className="mt-6 space-y-3">
           {[
             'Promptly evaluating and responding to prospective client inquiries',
             'Formulating tailored technological solutions and project scope proposals',
@@ -119,92 +163,149 @@ const policySections = [
             'Continuously monitoring and improving website performance and UX',
             'Ensuring network security and preventing fraudulent activities',
             'Complying with applicable legal and statutory requirements',
-          ].map((use, idx) => (
-            <li key={idx} className="flex items-start gap-3 text-sm text-slate-300">
-              <svg className="size-5 text-blue-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-              </svg>
-              <span>{use}</span>
-            </li>
+          ].map((use) => (
+            <div
+              key={use}
+              className="flex items-start gap-3 rounded-xl border border-white/[0.04] bg-white/[0.012] px-4 py-3.5"
+            >
+              <Check
+                size={16}
+                strokeWidth={2}
+                className="mt-0.5 shrink-0 text-sky-400"
+              />
+              <span className="text-sm leading-6 text-slate-400">{use}</span>
+            </div>
           ))}
-        </ul>
+        </div>
       </>
     ),
   },
+
   {
     id: 'legal-basis',
     title: 'Legal Basis for Processing',
     content: (
-      <p className="text-slate-300 leading-relaxed">
-        Where applicable, we process personal information under defined legal bases: explicit user consent, fulfillment of pre-contractual requests, legitimate business interests (e.g. maintaining security and providing support), or compliance with legal mandates.
+      <p className="text-sm leading-7 text-slate-400 sm:text-[15px]">
+        Where applicable, we process personal information under defined legal
+        bases: explicit user consent, fulfillment of pre-contractual requests,
+        legitimate business interests (e.g. maintaining security and providing
+        support), or compliance with legal mandates.
       </p>
     ),
   },
+
   {
     id: 'sharing',
     title: 'How We Share Information',
     content: (
       <>
-        <div className="mb-4 rounded-xl border border-emerald-500/30 bg-emerald-950/30 p-4 text-emerald-300 text-sm font-medium flex items-center gap-3">
-          <svg className="size-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-          Strict Commitment: We never sell, rent, or trade your personal information to third parties.
+        <div className="flex items-start gap-4 rounded-2xl border border-emerald-400/15 bg-emerald-400/[0.025] p-5">
+          <ShieldCheck
+            size={20}
+            strokeWidth={1.5}
+            className="mt-0.5 shrink-0 text-emerald-400"
+          />
+
+          <div>
+            <p className="text-sm font-semibold text-emerald-300">
+              Strict Commitment
+            </p>
+
+            <p className="mt-1 text-sm leading-6 text-slate-400">
+              We never sell, rent, or trade your personal information to third
+              parties.
+            </p>
+          </div>
         </div>
-        <p className="text-slate-300 leading-relaxed mb-3">
-          Information is shared only with trusted infrastructure providers who assist in hosting, database security, and electronic communications under strict confidentiality agreements.
+
+        <p className="mt-5 text-sm leading-7 text-slate-400 sm:text-[15px]">
+          Information is shared only with trusted infrastructure providers who
+          assist in hosting, database security, and electronic communications
+          under strict confidentiality agreements.
         </p>
-        <p className="text-slate-300 leading-relaxed">
-          We may disclose details when required by law enforcement, court order, or when necessary to defend our legal rights, property, or safety.
+
+        <p className="mt-4 text-sm leading-7 text-slate-400 sm:text-[15px]">
+          We may disclose details when required by law enforcement, court
+          order, or when necessary to defend our legal rights, property, or
+          safety.
         </p>
       </>
     ),
   },
+
   {
     id: 'third-party',
     title: 'Third-Party Services',
     content: (
-      <p className="text-slate-300 leading-relaxed">
-        Our digital platforms rely on reputable third-party vendors for cloud hosting, DNS services, and contact form processing. These entities process data under explicit instructions and maintain independent security compliance standards.
+      <p className="text-sm leading-7 text-slate-400 sm:text-[15px]">
+        Our digital platforms rely on reputable third-party vendors for cloud
+        hosting, DNS services, and contact form processing. These entities
+        process data under explicit instructions and maintain independent
+        security compliance standards.
       </p>
     ),
   },
+
   {
     id: 'cookies',
     title: 'Cookies and Tracking Technologies',
     content: (
-      <p className="text-slate-300 leading-relaxed">
-        We utilize essential session cookies to support platform functionality and basic analytics. You can control or disable cookie preferences directly through your browser settings, though certain functional features may be limited.
+      <p className="text-sm leading-7 text-slate-400 sm:text-[15px]">
+        We utilize essential session cookies to support platform functionality
+        and basic analytics. You can control or disable cookie preferences
+        directly through your browser settings, though certain functional
+        features may be limited.
       </p>
     ),
   },
+
   {
     id: 'security',
     title: 'Data Security Measures',
     content: (
-      <p className="text-slate-300 leading-relaxed">
-        We employ industry-standard administrative, physical, and technical safeguards—including TLS encryption and access-controlled databases—to safeguard your information. While no transmission method is 100% impenetrable, we actively maintain stringent security protocols.
-      </p>
+      <div className="rounded-2xl border border-sky-400/10 bg-sky-400/[0.018] p-5">
+        <div className="flex items-start gap-4">
+          <LockKeyhole
+            size={20}
+            strokeWidth={1.5}
+            className="mt-0.5 shrink-0 text-sky-400"
+          />
+
+          <p className="text-sm leading-7 text-slate-400 sm:text-[15px]">
+            We employ industry-standard administrative, physical, and
+            technical safeguards—including TLS encryption and access-controlled
+            databases—to safeguard your information. While no transmission
+            method is 100% impenetrable, we actively maintain stringent
+            security protocols.
+          </p>
+        </div>
+      </div>
     ),
   },
+
   {
     id: 'retention',
     title: 'Data Retention Policy',
     content: (
-      <p className="text-slate-300 leading-relaxed">
-        Personal details are retained only for the duration necessary to fulfill the operational purpose for which they were collected or to comply with applicable tax, accounting, and legal requirements.
+      <p className="text-sm leading-7 text-slate-400 sm:text-[15px]">
+        Personal details are retained only for the duration necessary to
+        fulfill the operational purpose for which they were collected or to
+        comply with applicable tax, accounting, and legal requirements.
       </p>
     ),
   },
+
   {
     id: 'rights',
     title: 'Your Privacy Rights',
     content: (
       <>
-        <p className="text-slate-300 leading-relaxed mb-4">
-          Depending on your jurisdiction, you retain rights regarding your personal information:
+        <p className="text-sm leading-7 text-slate-400 sm:text-[15px]">
+          Depending on your jurisdiction, you retain rights regarding your
+          personal information:
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+
+        <div className="mt-6 grid gap-3 md:grid-cols-2">
           {[
             'Right to request access to held records',
             'Right to rectify inaccurate information',
@@ -212,78 +313,119 @@ const policySections = [
             'Right to withdraw consent at any time',
             'Right to object to automated processing',
             'Right to receive a portable data copy',
-          ].map((right, idx) => (
-            <div key={idx} className="flex items-center gap-3 rounded-lg border border-slate-800 bg-[#0d1527]/60 p-3 text-sm text-slate-300">
-              <svg className="size-4 text-blue-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-              </svg>
-              <span>{right}</span>
+          ].map((right) => (
+            <div
+              key={right}
+              className="flex items-center gap-3 rounded-xl border border-white/[0.055] bg-white/[0.018] p-4"
+            >
+              <ShieldCheck
+                size={16}
+                strokeWidth={1.5}
+                className="shrink-0 text-sky-400"
+              />
+
+              <span className="text-sm leading-6 text-slate-400">
+                {right}
+              </span>
             </div>
           ))}
         </div>
       </>
     ),
   },
+
   {
     id: 'children',
     title: "Children's Privacy",
     content: (
-      <p className="text-slate-300 leading-relaxed">
-        Our services are designed for corporate clients and standard web users. We do not knowingly collect or solicit personal information from individuals under 13 years of age.
+      <p className="text-sm leading-7 text-slate-400 sm:text-[15px]">
+        Our services are designed for corporate clients and standard web users.
+        We do not knowingly collect or solicit personal information from
+        individuals under 13 years of age.
       </p>
     ),
   },
+
   {
     id: 'international',
     title: 'International Data Transfers',
     content: (
-      <p className="text-slate-300 leading-relaxed">
-        EZAC Technologies operates globally. Information submitted may be stored and processed on secure cloud infrastructure located outside your home state or country under recognized transfer safeguards.
+      <p className="text-sm leading-7 text-slate-400 sm:text-[15px]">
+        EZAC Technologies operates globally. Information submitted may be
+        stored and processed on secure cloud infrastructure located outside
+        your home state or country under recognized transfer safeguards.
       </p>
     ),
   },
+
   {
     id: 'external',
     title: 'External Web Links',
     content: (
-      <p className="text-slate-300 leading-relaxed">
-        Our website may contain links to third-party domains. EZAC Technologies does not control and is not liable for the privacy standards, content, or practices of external websites.
+      <p className="text-sm leading-7 text-slate-400 sm:text-[15px]">
+        Our website may contain links to third-party domains. EZAC Technologies
+        does not control and is not liable for the privacy standards, content,
+        or practices of external websites.
       </p>
     ),
   },
+
   {
     id: 'updates',
     title: 'Updates to This Privacy Policy',
     content: (
-      <p className="text-slate-300 leading-relaxed">
-        We reserve the right to revise this Privacy Policy periodically. Modifications take effect immediately upon publication, reflected by the updated Effective Date at the top of this document.
+      <p className="text-sm leading-7 text-slate-400 sm:text-[15px]">
+        We reserve the right to revise this Privacy Policy periodically.
+        Modifications take effect immediately upon publication, reflected by
+        the updated Effective Date at the top of this document.
       </p>
     ),
   },
+
   {
     id: 'contact-us',
     title: 'Contact Us',
     content: (
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 rounded-xl border border-blue-500/30 bg-blue-950/20 p-6">
-        <div>
-          <p className="text-slate-200 font-medium mb-1">Have questions or data requests?</p>
-          <p className="text-sm text-slate-400">Our privacy and compliance team is available to assist you directly.</p>
+      <div className="relative overflow-hidden rounded-2xl border border-sky-400/15 bg-sky-400/[0.025] p-6 sm:p-7">
+        <div className="absolute -right-20 -top-20 h-48 w-48 rounded-full bg-sky-400/[0.06] blur-[70px]" />
+
+        <div className="relative flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <div className="flex items-center gap-2">
+              <Mail
+                size={16}
+                strokeWidth={1.5}
+                className="text-sky-400"
+              />
+
+              <p className="text-sm font-semibold text-white">
+                Have questions or data requests?
+              </p>
+            </div>
+
+            <p className="mt-2 max-w-lg text-sm leading-6 text-slate-500">
+              Our privacy and compliance team is available to assist you
+              directly.
+            </p>
+          </div>
+
+          <a
+            href="/#contact"
+            className="group inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-[#078cff] px-5 py-3 text-[13px] font-semibold text-white shadow-[0_8px_30px_-8px_rgba(0,140,255,0.3)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#159cff] hover:shadow-[0_10px_35px_-8px_rgba(0,140,255,0.45)]"
+          >
+            Contact Legal Team
+
+            <ArrowRight
+              size={14}
+              strokeWidth={2.2}
+              className="transition-transform duration-300 group-hover:translate-x-1"
+            />
+          </a>
         </div>
-        <a
-          href="/#contact"
-          className="inline-flex shrink-0 items-center gap-2 rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-md transition-all hover:bg-blue-500 hover:shadow-blue-500/25"
-        >
-          Contact Legal Team
-          <svg className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-          </svg>
-        </a>
       </div>
     ),
   },
 ]
-
-
 
 export default function PrivacyPage() {
   const [searchQuery, setSearchQuery] = useState('')
@@ -291,11 +433,13 @@ export default function PrivacyPage() {
 
   const filteredSections = useMemo(() => {
     if (!searchQuery.trim()) return policySections
+
     const query = searchQuery.toLowerCase()
+
     return policySections.filter(
-      (sec) =>
-        sec.title.toLowerCase().includes(query) ||
-        sec.id.toLowerCase().includes(query)
+      (section) =>
+        section.title.toLowerCase().includes(query) ||
+        section.id.toLowerCase().includes(query)
     )
   }, [searchQuery])
 
@@ -308,178 +452,396 @@ export default function PrivacyPage() {
           }
         })
       },
-      { rootMargin: '-20% 0px -70% 0px' }
+      {
+        rootMargin: '-20% 0px -65% 0px',
+      }
     )
 
     policySections.forEach((section) => {
-      const el = document.getElementById(section.id)
-      if (el) observer.observe(el)
+      const element = document.getElementById(section.id)
+
+      if (element) {
+        observer.observe(element)
+      }
     })
 
     return () => observer.disconnect()
   }, [])
 
+  const scrollToSection = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    id: string
+  ) => {
+    event.preventDefault()
+
+    const element = document.getElementById(id)
+
+    if (element) {
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      })
+
+      setActiveSection(id)
+    }
+  }
+
   return (
-    <div className="relative min-h-screen bg-[#030712] text-slate-200 antialiased selection:bg-blue-600 selection:text-white">
-      {/* Background Subtle Gradient Overlay */}
-      <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-900/15 via-slate-950/50 to-[#030712]" />
+    <main className="relative min-h-screen overflow-hidden bg-[#020817] text-slate-200 antialiased selection:bg-sky-500/30 selection:text-white">
+      {/* =========================================================
+          BACKGROUND
+      ========================================================= */}
 
-      
+      <div className="pointer-events-none fixed inset-0 -z-10">
+        <div className="absolute -left-40 top-0 h-[600px] w-[600px] rounded-full bg-sky-500/[0.045] blur-[160px]" />
 
-      {/* Hero Header */}
-      <section className="relative pt-28 pb-10 border-b border-slate-800/80 bg-gradient-to-b from-[#080e1e] to-transparent">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-blue-400 mb-4">
-              Legal Information
+        <div className="absolute -right-48 top-[20%] h-[600px] w-[600px] rounded-full bg-cyan-400/[0.025] blur-[170px]" />
+
+        <div className="absolute -left-48 bottom-[10%] h-[500px] w-[500px] rounded-full bg-blue-500/[0.025] blur-[170px]" />
+
+        <div
+          className="absolute inset-0 opacity-[0.018]"
+          style={{
+            backgroundImage:
+              'linear-gradient(rgba(56,189,248,0.5) 1px,transparent 1px),linear-gradient(90deg,rgba(56,189,248,0.5) 1px,transparent 1px)',
+            backgroundSize: '70px 70px',
+          }}
+        />
+
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(2,8,23,0.35)_55%,rgba(2,8,23,0.9)_100%)]" />
+      </div>
+
+      {/* =========================================================
+          HERO
+      ========================================================= */}
+
+      <section className="relative border-b border-white/[0.055]">
+        <div className="mx-auto max-w-7xl px-5 pb-16 pt-32 sm:px-8 sm:pb-20 sm:pt-40 lg:px-10">
+          <div className="max-w-4xl">
+            <div className="mb-7 flex items-center gap-3">
+              <span className="h-px w-9 bg-gradient-to-r from-sky-400 to-transparent" />
+
+              <span className="font-mono text-[10px] font-medium uppercase tracking-[0.32em] text-sky-400">
+                Legal / Privacy
+              </span>
             </div>
-            <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl">
-              Privacy Policy
+
+            <h1 className="text-5xl font-semibold leading-[0.95] tracking-[-0.055em] text-white sm:text-6xl lg:text-[5.8rem]">
+              Your privacy
+              <span className="block bg-gradient-to-r from-[#5ec8ff] via-[#078cff] to-[#3ad4ff] bg-clip-text text-transparent">
+                matters to us.
+              </span>
             </h1>
-            <p className="mt-3 text-base text-slate-400 sm:text-lg leading-relaxed">
-              This document outlines how EZAC Technologies manages, processes, and protects personal information gathered through our services and platforms.
+
+            <p className="mt-8 max-w-2xl text-base leading-8 text-slate-400 sm:text-lg">
+              This document outlines how EZAC Technologies manages, processes,
+              and protects personal information gathered through our services
+              and platforms.
             </p>
 
-            {/* Quick Meta Stats */}
-            <div className="mt-6 flex flex-wrap items-center gap-4 text-xs font-medium text-slate-400">
-              <span className="flex items-center gap-1.5 rounded-md border border-slate-800 bg-slate-900/80 px-3 py-1.5">
-                <svg className="size-4 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                Effective Date: August 15, 2026
-              </span>
-              <span className="flex items-center gap-1.5 rounded-md border border-slate-800 bg-slate-900/80 px-3 py-1.5">
-                <svg className="size-4 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                Est. Read Time: 4 mins
-              </span>
+            <div className="mt-10 grid max-w-xl grid-cols-2 border-y border-white/[0.06] py-5 sm:grid-cols-3">
+              <div>
+                <span className="font-mono text-[8px] uppercase tracking-[0.28em] text-slate-600">
+                  Document
+                </span>
+
+                <p className="mt-2 text-xs text-slate-300">
+                  Privacy Policy
+                </p>
+              </div>
+
+              <div className="border-l border-white/[0.06] pl-5">
+                <span className="font-mono text-[8px] uppercase tracking-[0.28em] text-slate-600">
+                  Effective
+                </span>
+
+                <p className="mt-2 text-xs text-slate-300">
+                  August 15, 2026
+                </p>
+              </div>
+
+              <div className="mt-5 border-l-0 border-white/[0.06] pl-0 sm:mt-0 sm:border-l sm:pl-5">
+                <span className="font-mono text-[8px] uppercase tracking-[0.28em] text-slate-600">
+                  Read Time
+                </span>
+
+                <p className="mt-2 text-xs text-slate-300">
+                  Approximately 4 mins
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Main Container with Sticky TOC */}
-      <main className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
-          
-          {/* Left Sidebar: Search & Sticky Table of Contents */}
-          <aside className="lg:col-span-4 lg:block">
-            <div className="sticky top-24 space-y-6">
-              
-              {/* Search Bar */}
+      {/* =========================================================
+          MAIN CONTENT
+      ========================================================= */}
+
+      <section className="relative mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
+        <div className="grid gap-12 lg:grid-cols-[280px_1fr] lg:gap-16">
+          {/* =====================================================
+              SIDEBAR
+          ===================================================== */}
+
+          <aside className="lg:block">
+            <div className="sticky top-24">
+              <div className="mb-4 flex items-center gap-3">
+                <span className="h-px w-7 bg-sky-400/60" />
+
+                <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-sky-400/80">
+                  Privacy
+                </span>
+              </div>
+
+              {/* Search */}
+
               <div className="relative">
+                <Search
+                  size={15}
+                  strokeWidth={1.5}
+                  className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-600"
+                />
+
                 <input
                   type="text"
                   placeholder="Search policy topics..."
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full rounded-xl border border-slate-800 bg-[#09101f] px-4 py-2.5 pl-10 text-sm text-slate-200 placeholder-slate-500 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                  onChange={(event) =>
+                    setSearchQuery(event.target.value)
+                  }
+                  className="h-11 w-full rounded-xl border border-white/[0.07] bg-[#040b1b]/80 pl-10 pr-10 text-xs text-slate-300 outline-none backdrop-blur-xl transition-all placeholder:text-slate-600 focus:border-sky-400/30 focus:ring-1 focus:ring-sky-400/10"
                 />
-                <svg
-                  className="absolute left-3 top-3 size-4 text-slate-500"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
+
                 {searchQuery && (
                   <button
+                    type="button"
                     onClick={() => setSearchQuery('')}
-                    className="absolute right-3 top-3 text-xs text-slate-400 hover:text-white"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-600 transition-colors hover:text-white"
+                    aria-label="Clear search"
                   >
-                    Clear
+                    <X size={14} />
                   </button>
                 )}
               </div>
 
-              {/* Navigation Links */}
-              <div className="rounded-xl border border-slate-800/80 bg-[#070e1c]/60 p-4 max-h-[calc(100vh-180px)] overflow-y-auto custom-scrollbar">
-                <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-slate-400 px-2">
-                  Table of Contents ({filteredSections.length})
-                </p>
-                <nav className="space-y-1">
-                  {filteredSections.map((sec, index) => {
-                    const isActive = activeSection === sec.id
+              {/* TOC */}
+
+              <div className="mt-5 overflow-hidden rounded-2xl border border-sky-900/40 bg-[#040b1b]/75 backdrop-blur-xl">
+                <div className="flex items-center justify-between border-b border-white/[0.06] px-4 py-4">
+                  <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-slate-500">
+                    Sections
+                  </span>
+
+                  <span className="font-mono text-[9px] text-sky-400/70">
+                    {filteredSections.length
+                      .toString()
+                      .padStart(2, '0')}
+                  </span>
+                </div>
+
+                <nav className="max-h-[calc(100vh-270px)] overflow-y-auto p-2">
+                  {filteredSections.map((section, index) => {
+                    const isActive = activeSection === section.id
+
                     return (
                       <a
-                        key={sec.id}
-                        href={`#${sec.id}`}
-                        onClick={(e) => {
-                          e.preventDefault()
-                          document.getElementById(sec.id)?.scrollIntoView({ behavior: 'smooth' })
-                          setActiveSection(sec.id)
-                        }}
-                        className={`group flex items-center gap-2.5 rounded-lg px-3 py-2 text-xs font-medium transition-all ${
+                        key={section.id}
+                        href={`#${section.id}`}
+                        onClick={(event) =>
+                          scrollToSection(event, section.id)
+                        }
+                        className={`group flex items-start gap-3 rounded-xl px-3 py-2.5 transition-all duration-300 ${
                           isActive
-                            ? 'bg-blue-600/20 text-blue-400 border border-blue-500/30'
-                            : 'text-slate-400 hover:bg-slate-800/50 hover:text-slate-200'
+                            ? 'border border-sky-400/15 bg-sky-400/[0.06] text-sky-300'
+                            : 'border border-transparent text-slate-500 hover:bg-white/[0.025] hover:text-slate-300'
                         }`}
                       >
-                        <span className={`flex size-5 shrink-0 items-center justify-center rounded text-[10px] font-mono ${
-                          isActive ? 'bg-blue-500 text-white' : 'bg-slate-800 text-slate-400 group-hover:text-slate-200'
-                        }`}>
-                          {index + 1}
+                        <span
+                          className={`mt-0.5 w-5 shrink-0 font-mono text-[8px] ${
+                            isActive
+                              ? 'text-sky-400'
+                              : 'text-slate-700'
+                          }`}
+                        >
+                          {(index + 1).toString().padStart(2, '0')}
                         </span>
-                        <span className="truncate">{sec.title}</span>
+
+                        <span className="text-[11px] leading-5">
+                          {section.title}
+                        </span>
                       </a>
                     )
                   })}
+
+                  {filteredSections.length === 0 && (
+                    <div className="px-4 py-8 text-center">
+                      <Search
+                        size={20}
+                        className="mx-auto text-slate-700"
+                      />
+
+                      <p className="mt-3 text-xs text-slate-600">
+                        No matching topics found.
+                      </p>
+                    </div>
+                  )}
                 </nav>
               </div>
-
             </div>
           </aside>
 
-          {/* Right Content Column */}
-          <div className="lg:col-span-8 space-y-8">
-            
-            {/* Introductory Statement */}
-            <div className="rounded-xl border border-slate-800 bg-[#080f20]/70 p-6 sm:p-8 backdrop-blur-sm">
-              <p className="text-base text-slate-200 leading-relaxed">
-                At <strong className="text-white">EZAC Technologies</strong>, transparency and security are central to our values. This Privacy Policy clarifies how personal data is collected, utilized, and safeguarded when you access our platforms, services, and associated domains.
-              </p>
+          {/* =====================================================
+              POLICY CONTENT
+          ===================================================== */}
+
+          <div className="min-w-0">
+            {/* Overview */}
+
+            <div className="mb-10 overflow-hidden rounded-3xl border border-sky-900/40 bg-[#040b1b]/75 p-6 backdrop-blur-xl sm:p-8">
+              <div className="flex items-start gap-5">
+                <div className="flex size-11 shrink-0 items-center justify-center rounded-xl border border-sky-400/15 bg-sky-400/[0.05]">
+                  <FileText
+                    size={20}
+                    strokeWidth={1.4}
+                    className="text-sky-400"
+                  />
+                </div>
+
+                <div>
+                  <div className="flex items-center gap-3">
+                    <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-sky-400/80">
+                      Privacy Overview
+                    </span>
+                  </div>
+
+                  <h2 className="mt-2 text-xl font-semibold tracking-tight text-white">
+                    How we handle your information
+                  </h2>
+
+                  <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-500">
+                    This policy explains the information we collect, how it is
+                    used, how it may be shared, and the rights available to
+                    individuals regarding their personal information.
+                  </p>
+                </div>
+              </div>
             </div>
 
-            {/* Policy Sections */}
-            {filteredSections.length > 0 ? (
-              filteredSections.map((sec, idx) => (
-                <section
-                  key={sec.id}
-                  id={sec.id}
-                  className="scroll-mt-24 rounded-xl border border-slate-800/80 bg-[#060b17]/80 p-6 sm:p-8 transition-colors hover:border-slate-700/80"
+            {/* Sections */}
+
+            <div className="space-y-5">
+              {filteredSections.map((section, index) => (
+                <article
+                  key={section.id}
+                  id={section.id}
+                  className="scroll-mt-24 overflow-hidden rounded-3xl border border-sky-900/30 bg-[#040b1b]/70 backdrop-blur-xl transition-all duration-300 hover:border-sky-900/55"
                 >
-                  <div className="flex items-center gap-3 mb-4 pb-3 border-b border-slate-800/80">
-                    <span className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-blue-950 text-xs font-bold text-blue-400 border border-blue-800/50">
-                      {idx + 1}
-                    </span>
-                    <h2 className="text-xl font-bold text-white tracking-tight">
-                      {sec.title}
-                    </h2>
+                  {/* Section header */}
+
+                  <div className="border-b border-white/[0.055] px-6 py-6 sm:px-8">
+                    <div className="flex items-start gap-4">
+                      <span className="font-mono text-[10px] tracking-[0.15em] text-sky-400/70">
+                        {(index + 1).toString().padStart(2, '0')}
+                      </span>
+
+                      <div>
+                        <span className="font-mono text-[8px] uppercase tracking-[0.3em] text-slate-700">
+                          Policy Section
+                        </span>
+
+                        <h2 className="mt-1 text-xl font-semibold tracking-[-0.025em] text-white sm:text-2xl">
+                          {section.title}
+                        </h2>
+                      </div>
+                    </div>
                   </div>
-                  <div>{sec.content}</div>
-                </section>
-              ))
-            ) : (
-              <div className="rounded-xl border border-slate-800 bg-slate-900/50 p-12 text-center">
-                <p className="text-slate-400 text-sm">No policy sections matching "{searchQuery}"</p>
-                <button
-                  onClick={() => setSearchQuery('')}
-                  className="mt-3 text-xs text-blue-400 hover:underline font-medium"
-                >
-                  Reset search query
-                </button>
-              </div>
-            )}
 
+                  {/* Section content */}
+
+                  <div className="px-6 py-7 sm:px-8 sm:py-8">
+                    {section.content}
+                  </div>
+                </article>
+              ))}
+
+              {filteredSections.length === 0 && (
+                <div className="rounded-3xl border border-white/[0.06] bg-[#040b1b]/70 px-6 py-16 text-center">
+                  <Search
+                    size={30}
+                    strokeWidth={1.3}
+                    className="mx-auto text-slate-700"
+                  />
+
+                  <h2 className="mt-5 text-lg font-semibold text-white">
+                    No policy sections found
+                  </h2>
+
+                  <p className="mx-auto mt-2 max-w-sm text-sm leading-6 text-slate-500">
+                    Try searching for another privacy topic.
+                  </p>
+
+                  <button
+                    type="button"
+                    onClick={() => setSearchQuery('')}
+                    className="mt-6 inline-flex items-center gap-2 rounded-xl border border-white/[0.08] bg-white/[0.025] px-4 py-2.5 text-xs font-medium text-slate-300 transition-colors hover:border-sky-400/25 hover:text-white"
+                  >
+                    Clear Search
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
-
         </div>
-      </main>
+      </section>
 
-    
-    </div>
+      {/* =========================================================
+          BOTTOM CTA
+      ========================================================= */}
+
+      <section className="relative mx-auto max-w-7xl px-5 pb-24 sm:px-8 lg:px-10 lg:pb-32">
+        <div className="relative overflow-hidden rounded-3xl border border-sky-900/40 bg-[#040b1b]/80 p-8 text-center shadow-[0_30px_100px_-60px_rgba(56,189,248,0.35)] backdrop-blur-xl sm:p-12">
+          <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-sky-400/[0.045] blur-[100px]" />
+
+          <div className="absolute -left-24 bottom-[-120px] h-72 w-72 rounded-full bg-blue-500/[0.035] blur-[100px]" />
+
+          <div className="relative">
+            <div className="mx-auto flex size-12 items-center justify-center rounded-xl border border-sky-400/15 bg-sky-400/[0.05]">
+              <LockKeyhole
+                size={21}
+                strokeWidth={1.4}
+                className="text-sky-400"
+              />
+            </div>
+
+            <div className="mt-6 font-mono text-[9px] uppercase tracking-[0.3em] text-sky-400/80">
+              Privacy / Support
+            </div>
+
+            <h2 className="mx-auto mt-4 max-w-2xl text-3xl font-semibold tracking-[-0.04em] text-white sm:text-4xl">
+              Have questions about your information?
+            </h2>
+
+            <p className="mx-auto mt-4 max-w-xl text-sm leading-7 text-slate-500">
+              If you have questions about this Privacy Policy or would like to
+              make a data request, contact our team directly.
+            </p>
+
+            <a
+              href="/#contact"
+              className="group mt-7 inline-flex h-11 items-center justify-center rounded-xl bg-[#078cff] px-6 text-[13px] font-semibold text-white shadow-[0_8px_30px_-8px_rgba(0,140,255,0.3)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#159cff] hover:shadow-[0_10px_35px_-8px_rgba(0,140,255,0.45)]"
+            >
+              Contact Legal Team
+
+              <ArrowRight
+                size={14}
+                strokeWidth={2.2}
+                className="ml-2 transition-transform duration-300 group-hover:translate-x-1"
+              />
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
   )
 }
