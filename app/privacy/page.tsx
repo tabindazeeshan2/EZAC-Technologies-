@@ -1,11 +1,9 @@
 'use client'
 
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import {
   ArrowRight,
-  CalendarDays,
   Check,
-  Clock3,
   FileText,
   LockKeyhole,
   Mail,
@@ -13,55 +11,6 @@ import {
   ShieldCheck,
   X,
 } from 'lucide-react'
-
-function Logo({
-  className = '',
-  showWordmark = true,
-}: {
-  className?: string
-  showWordmark?: boolean
-}) {
-  const [imgError, setImgError] = useState(false)
-
-  return (
-    <a
-      href="/"
-      aria-label="EZAC Technologies home"
-      className={`group flex items-center gap-2.5 ${className}`}
-    >
-      <span className="relative inline-flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-blue-950/80 ring-1 ring-blue-500/30 transition-transform duration-300 group-hover:scale-105">
-        {!imgError ? (
-          <img
-            src="/ezac-logo.jpeg"
-            alt="EZAC Technologies logo"
-            className="h-full w-full object-cover"
-            onError={() => setImgError(true)}
-          />
-        ) : (
-          <span className="text-xs font-black tracking-tighter text-blue-400">
-            EZ
-          </span>
-        )}
-      </span>
-
-      {showWordmark && (
-        <span className="text-base font-bold leading-none tracking-tight text-white">
-          EZAC
-          <span className="ml-1 font-medium text-slate-400">
-            Technologies
-          </span>
-        </span>
-      )}
-    </a>
-  )
-}
-
-const navLinks = [
-  { label: 'Home', href: '/' },
-  { label: 'About', href: '/#about' },
-  { label: 'Services', href: '/#services' },
-  { label: 'Contact', href: '/#contact' },
-]
 
 const policySections = [
   {
@@ -102,7 +51,6 @@ const policySections = [
       </>
     ),
   },
-
   {
     id: 'auto-collect',
     title: 'Information Collected Automatically',
@@ -144,7 +92,6 @@ const policySections = [
       </>
     ),
   },
-
   {
     id: 'how-we-use',
     title: 'How We Use Your Information',
@@ -180,7 +127,6 @@ const policySections = [
       </>
     ),
   },
-
   {
     id: 'legal-basis',
     title: 'Legal Basis for Processing',
@@ -193,7 +139,6 @@ const policySections = [
       </p>
     ),
   },
-
   {
     id: 'sharing',
     title: 'How We Share Information',
@@ -232,7 +177,6 @@ const policySections = [
       </>
     ),
   },
-
   {
     id: 'third-party',
     title: 'Third-Party Services',
@@ -245,7 +189,6 @@ const policySections = [
       </p>
     ),
   },
-
   {
     id: 'cookies',
     title: 'Cookies and Tracking Technologies',
@@ -258,7 +201,6 @@ const policySections = [
       </p>
     ),
   },
-
   {
     id: 'security',
     title: 'Data Security Measures',
@@ -282,7 +224,6 @@ const policySections = [
       </div>
     ),
   },
-
   {
     id: 'retention',
     title: 'Data Retention Policy',
@@ -294,7 +235,6 @@ const policySections = [
       </p>
     ),
   },
-
   {
     id: 'rights',
     title: 'Your Privacy Rights',
@@ -333,7 +273,6 @@ const policySections = [
       </>
     ),
   },
-
   {
     id: 'children',
     title: "Children's Privacy",
@@ -345,7 +284,6 @@ const policySections = [
       </p>
     ),
   },
-
   {
     id: 'international',
     title: 'International Data Transfers',
@@ -357,7 +295,6 @@ const policySections = [
       </p>
     ),
   },
-
   {
     id: 'external',
     title: 'External Web Links',
@@ -369,7 +306,6 @@ const policySections = [
       </p>
     ),
   },
-
   {
     id: 'updates',
     title: 'Updates to This Privacy Policy',
@@ -381,7 +317,6 @@ const policySections = [
       </p>
     ),
   },
-
   {
     id: 'contact-us',
     title: 'Contact Us',
@@ -430,9 +365,13 @@ const policySections = [
 export default function PrivacyPage() {
   const [searchQuery, setSearchQuery] = useState('')
   const [activeSection, setActiveSection] = useState('info-collect')
+  const clickTargetRef = useRef<string | null>(null)
+  const animationFrameRef = useRef<number | null>(null)
 
   const filteredSections = useMemo(() => {
-    if (!searchQuery.trim()) return policySections
+    if (!searchQuery.trim()) {
+      return policySections
+    }
 
     const query = searchQuery.toLowerCase()
 
@@ -444,29 +383,89 @@ export default function PrivacyPage() {
   }, [searchQuery])
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id)
+    if (filteredSections.length === 0) {
+      return
+    }
+
+    if (!filteredSections.some((section) => section.id === activeSection)) {
+      setActiveSection(filteredSections[0].id)
+    }
+  }, [filteredSections, activeSection])
+
+  useEffect(() => {
+    const getCurrentSection = () => {
+      if (clickTargetRef.current) {
+        const target = document.getElementById(clickTargetRef.current)
+
+        if (target) {
+          const targetTop = target.getBoundingClientRect().top
+
+          if (targetTop <= 130 && targetTop >= -20) {
+            clickTargetRef.current = null
+          } else {
+            return
           }
-        })
-      },
-      {
-        rootMargin: '-20% 0px -65% 0px',
+        } else {
+          clickTargetRef.current = null
+        }
       }
-    )
 
-    policySections.forEach((section) => {
-      const element = document.getElementById(section.id)
-
-      if (element) {
-        observer.observe(element)
+      if (filteredSections.length === 0) {
+        return
       }
+
+      const activationLine = 140
+      let currentSection = filteredSections[0].id
+
+      for (const section of filteredSections) {
+        const element = document.getElementById(section.id)
+
+        if (!element) {
+          continue
+        }
+
+        const top = element.getBoundingClientRect().top
+
+        if (top <= activationLine) {
+          currentSection = section.id
+        } else {
+          break
+        }
+      }
+
+      setActiveSection((current) =>
+        current === currentSection ? current : currentSection
+      )
+    }
+
+    const handleScroll = () => {
+      if (animationFrameRef.current !== null) {
+        return
+      }
+
+      animationFrameRef.current = requestAnimationFrame(() => {
+        animationFrameRef.current = null
+        getCurrentSection()
+      })
+    }
+
+    window.addEventListener('scroll', handleScroll, {
+      passive: true,
     })
 
-    return () => observer.disconnect()
-  }, [])
+    window.addEventListener('resize', handleScroll)
+
+    getCurrentSection()
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', handleScroll)
+
+      if (animationFrameRef.current !== null) {
+        cancelAnimationFrame(animationFrameRef.current)
+      }
+    }
+  }, [filteredSections])
 
   const scrollToSection = (
     event: React.MouseEvent<HTMLAnchorElement>,
@@ -476,22 +475,21 @@ export default function PrivacyPage() {
 
     const element = document.getElementById(id)
 
-    if (element) {
-      element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      })
-
-      setActiveSection(id)
+    if (!element) {
+      return
     }
+
+    clickTargetRef.current = id
+    setActiveSection(id)
+
+    element.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    })
   }
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#020817] text-slate-200 antialiased selection:bg-sky-500/30 selection:text-white">
-      {/* =========================================================
-          BACKGROUND
-      ========================================================= */}
-
       <div className="pointer-events-none fixed inset-0 -z-10">
         <div className="absolute -left-40 top-0 h-[600px] w-[600px] rounded-full bg-sky-500/[0.045] blur-[160px]" />
 
@@ -510,10 +508,6 @@ export default function PrivacyPage() {
 
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(2,8,23,0.35)_55%,rgba(2,8,23,0.9)_100%)]" />
       </div>
-
-      {/* =========================================================
-          HERO
-      ========================================================= */}
 
       <section className="relative border-b border-white/[0.055]">
         <div className="mx-auto max-w-7xl px-5 pb-16 pt-32 sm:px-8 sm:pb-20 sm:pt-40 lg:px-10">
@@ -574,16 +568,8 @@ export default function PrivacyPage() {
         </div>
       </section>
 
-      {/* =========================================================
-          MAIN CONTENT
-      ========================================================= */}
-
       <section className="relative mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
         <div className="grid gap-12 lg:grid-cols-[280px_1fr] lg:gap-16">
-          {/* =====================================================
-              SIDEBAR
-          ===================================================== */}
-
           <aside className="lg:block">
             <div className="sticky top-24">
               <div className="mb-4 flex items-center gap-3">
@@ -593,8 +579,6 @@ export default function PrivacyPage() {
                   Privacy
                 </span>
               </div>
-
-              {/* Search */}
 
               <div className="relative">
                 <Search
@@ -607,9 +591,7 @@ export default function PrivacyPage() {
                   type="text"
                   placeholder="Search policy topics..."
                   value={searchQuery}
-                  onChange={(event) =>
-                    setSearchQuery(event.target.value)
-                  }
+                  onChange={(event) => setSearchQuery(event.target.value)}
                   className="h-11 w-full rounded-xl border border-white/[0.07] bg-[#040b1b]/80 pl-10 pr-10 text-xs text-slate-300 outline-none backdrop-blur-xl transition-all placeholder:text-slate-600 focus:border-sky-400/30 focus:ring-1 focus:ring-sky-400/10"
                 />
 
@@ -625,8 +607,6 @@ export default function PrivacyPage() {
                 )}
               </div>
 
-              {/* TOC */}
-
               <div className="mt-5 overflow-hidden rounded-2xl border border-sky-900/40 bg-[#040b1b]/75 backdrop-blur-xl">
                 <div className="flex items-center justify-between border-b border-white/[0.06] px-4 py-4">
                   <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-slate-500">
@@ -634,9 +614,7 @@ export default function PrivacyPage() {
                   </span>
 
                   <span className="font-mono text-[9px] text-sky-400/70">
-                    {filteredSections.length
-                      .toString()
-                      .padStart(2, '0')}
+                    {filteredSections.length.toString().padStart(2, '0')}
                   </span>
                 </div>
 
@@ -691,13 +669,7 @@ export default function PrivacyPage() {
             </div>
           </aside>
 
-          {/* =====================================================
-              POLICY CONTENT
-          ===================================================== */}
-
           <div className="min-w-0">
-            {/* Overview */}
-
             <div className="mb-10 overflow-hidden rounded-3xl border border-sky-900/40 bg-[#040b1b]/75 p-6 backdrop-blur-xl sm:p-8">
               <div className="flex items-start gap-5">
                 <div className="flex size-11 shrink-0 items-center justify-center rounded-xl border border-sky-400/15 bg-sky-400/[0.05]">
@@ -709,11 +681,9 @@ export default function PrivacyPage() {
                 </div>
 
                 <div>
-                  <div className="flex items-center gap-3">
-                    <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-sky-400/80">
-                      Privacy Overview
-                    </span>
-                  </div>
+                  <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-sky-400/80">
+                    Privacy Overview
+                  </span>
 
                   <h2 className="mt-2 text-xl font-semibold tracking-tight text-white">
                     How we handle your information
@@ -728,8 +698,6 @@ export default function PrivacyPage() {
               </div>
             </div>
 
-            {/* Sections */}
-
             <div className="space-y-5">
               {filteredSections.map((section, index) => (
                 <article
@@ -737,27 +705,17 @@ export default function PrivacyPage() {
                   id={section.id}
                   className="scroll-mt-24 overflow-hidden rounded-3xl border border-sky-900/30 bg-[#040b1b]/70 backdrop-blur-xl transition-all duration-300 hover:border-sky-900/55"
                 >
-                  {/* Section header */}
-
                   <div className="border-b border-white/[0.055] px-6 py-6 sm:px-8">
-                    <div className="flex items-start gap-4">
-                      <span className="font-mono text-[10px] tracking-[0.15em] text-sky-400/70">
+                    <div className="flex items-center gap-4">
+                      <span className="shrink-0 font-mono text-sm tracking-[0.15em] text-sky-400/70">
                         {(index + 1).toString().padStart(2, '0')}
                       </span>
 
-                      <div>
-                        <span className="font-mono text-[8px] uppercase tracking-[0.3em] text-slate-700">
-                          Policy Section
-                        </span>
-
-                        <h2 className="mt-1 text-xl font-semibold tracking-[-0.025em] text-white sm:text-2xl">
-                          {section.title}
-                        </h2>
-                      </div>
+                      <h2 className="text-xl font-semibold tracking-[-0.025em] text-white sm:text-2xl">
+                        {section.title}
+                      </h2>
                     </div>
                   </div>
-
-                  {/* Section content */}
 
                   <div className="px-6 py-7 sm:px-8 sm:py-8">
                     {section.content}
@@ -794,10 +752,6 @@ export default function PrivacyPage() {
           </div>
         </div>
       </section>
-
-      {/* =========================================================
-          BOTTOM CTA
-      ========================================================= */}
 
       <section className="relative mx-auto max-w-7xl px-5 pb-24 sm:px-8 lg:px-10 lg:pb-32">
         <div className="relative overflow-hidden rounded-3xl border border-sky-900/40 bg-[#040b1b]/80 p-8 text-center shadow-[0_30px_100px_-60px_rgba(56,189,248,0.35)] backdrop-blur-xl sm:p-12">
