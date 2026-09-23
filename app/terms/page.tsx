@@ -722,49 +722,7 @@ export default function TermsPage() {
           </div>
         </section>
 
-        <section className="relative mx-auto max-w-7xl px-5 pb-24 sm:px-8 lg:px-10 lg:pb-32">
-          <div className="relative overflow-hidden rounded-3xl border border-sky-900/40 bg-[#040b1b]/80 p-8 text-center shadow-[0_30px_100px_-60px_rgba(56,189,248,0.35)] backdrop-blur-xl sm:p-12">
-            <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-sky-400/[0.045] blur-[100px]" />
-
-            <div className="absolute -left-24 bottom-[-120px] h-72 w-72 rounded-full bg-blue-500/[0.035] blur-[100px]" />
-
-            <div className="relative">
-              <div className="mx-auto flex size-12 items-center justify-center rounded-xl border border-sky-400/15 bg-sky-400/[0.05]">
-                <LockKeyhole
-                  size={21}
-                  strokeWidth={1.4}
-                  className="text-sky-400"
-                />
-              </div>
-
-              <div className="mt-6 font-mono text-[9px] uppercase tracking-[0.3em] text-sky-400/80">
-                Terms / Support
-              </div>
-
-              <h2 className="mx-auto mt-4 max-w-2xl text-3xl font-semibold tracking-[-0.04em] text-white sm:text-4xl">
-                Have questions about these terms?
-              </h2>
-
-              <p className="mx-auto mt-4 max-w-xl text-sm leading-7 text-slate-500">
-                If you have questions about these Terms of Service or need
-                clarification on any section, contact our team directly.
-              </p>
-
-              <a
-                href="/#contact"
-                className="group mt-7 inline-flex h-11 items-center justify-center rounded-xl bg-[#078cff] px-6 text-[13px] font-semibold text-white shadow-[0_8px_30px_-8px_rgba(0,140,255,0.3)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#159cff] hover:shadow-[0_10px_35px_-8px_rgba(0,140,255,0.45)]"
-              >
-                Contact Legal Team
-
-                <ArrowRight
-                  size={14}
-                  strokeWidth={2.2}
-                  className="ml-2 transition-transform duration-300 group-hover:translate-x-1"
-                />
-              </a>
-            </div>
-          </div>
-        </section>
+        
       </main>
     </>
   )
