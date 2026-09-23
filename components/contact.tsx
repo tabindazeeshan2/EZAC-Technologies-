@@ -365,29 +365,6 @@ export function Contact() {
                     )}
                   </div>
 
-                  <div>
-                    <label htmlFor="budget" className={labelClass}>
-                      Budget Range{' '}
-                      <span className="text-slate-600">(optional)</span>
-                    </label>
-
-                    <select
-                      id="budget"
-                      name="budget"
-                      defaultValue=""
-                      className={fieldClass}
-                    >
-                      <option value="" disabled>
-                        Select a range
-                      </option>
-
-                      {budgetOptions.map((opt) => (
-                        <option key={opt} value={opt}>
-                          {opt}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
 
                   {/* Exact EZAC button style */}
                   <button
