@@ -4,8 +4,7 @@ import { useState, type FormEvent } from 'react'
 import { CheckCircle2, Send, Mail, ArrowUpRight } from 'lucide-react'
 import { Reveal } from '@/components/reveal'
 import { LinkedInIcon, InstagramIcon } from '@/components/social-icons'
-import { site, serviceOptions, budgetOptions } from '@/lib/site-config'
-import { submitContactForm } from '@/lib/firebase/contacts'
+import { site, serviceOptions } from '@/lib/site-config'
 
 type Errors = Partial<Record<'name' | 'email' | 'details', string>>
 
@@ -53,6 +52,7 @@ export function Contact() {
     }
 
     setSubmitting(true)
+    setErrors({})
 
     try {
       const payload = {
@@ -64,23 +64,33 @@ export function Contact() {
         budget: String(data.get('budget') ?? '').trim(),
       }
 
-      await submitContactForm(payload)
-
       const response = await fetch('/api/contact', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify(payload),
       })
 
+      const result = await response.json().catch(() => ({}))
+
       if (!response.ok) {
-        const errData = await response.json().catch(() => ({}))
-        console.warn('Email trigger note:', errData.error || response.statusText)
+        throw new Error(
+          result.error || 'Unable to send your inquiry. Please try again.'
+        )
       }
 
       setSubmitted(true)
       form.reset()
     } catch (error) {
       console.error('Error submitting contact form:', error)
+
+      setErrors({
+        details:
+          error instanceof Error
+            ? error.message
+            : 'Something went wrong. Please try again.',
+      })
     } finally {
       setSubmitting(false)
     }
@@ -149,8 +159,6 @@ export function Contact() {
               <div className="pointer-events-none absolute -right-20 -top-20 h-48 w-48 rounded-full bg-sky-400/[0.05] blur-3xl" />
 
               <div className="relative">
-                
-
                 <h3 className="mt-3 text-2xl font-semibold tracking-[-0.03em] text-white">
                   Let&apos;s Talk
                 </h3>
@@ -216,8 +224,6 @@ export function Contact() {
                 </a>
 
               </div>
-
-              
             </div>
           </Reveal>
 
@@ -245,18 +251,30 @@ export function Contact() {
 
                   <button
                     type="button"
-                    onClick={() => setSubmitted(false)}
+                    onClick={() => {
+                      setSubmitted(false)
+                      setErrors({})
+                    }}
                     className="mt-7 inline-flex h-10 items-center justify-center rounded-full border border-sky-400/30 px-5 text-[13px] font-semibold text-sky-400 transition-all duration-300 hover:-translate-y-0.5 hover:border-sky-400/50 hover:bg-sky-400/[0.06]"
                   >
                     Send another inquiry
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} noValidate className="relative space-y-5">
+                <form
+                  onSubmit={handleSubmit}
+                  noValidate
+                  className="relative space-y-5"
+                >
 
                   <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+
+                    {/* Name */}
                     <div>
-                      <label htmlFor="name" className={labelClass}>
+                      <label
+                        htmlFor="name"
+                        className={labelClass}
+                      >
                         Full Name <span className="text-sky-400">*</span>
                       </label>
 
@@ -269,6 +287,7 @@ export function Contact() {
                         aria-invalid={!!errors.name}
                         className={fieldClass}
                         placeholder="Hannah Williams"
+                        disabled={submitting}
                       />
 
                       {errors.name && (
@@ -278,8 +297,12 @@ export function Contact() {
                       )}
                     </div>
 
+                    {/* Email */}
                     <div>
-                      <label htmlFor="email" className={labelClass}>
+                      <label
+                        htmlFor="email"
+                        className={labelClass}
+                      >
                         Email Address <span className="text-sky-400">*</span>
                       </label>
 
@@ -292,6 +315,7 @@ export function Contact() {
                         aria-invalid={!!errors.email}
                         className={fieldClass}
                         placeholder="hannah@company.com"
+                        disabled={submitting}
                       />
 
                       {errors.email && (
@@ -302,11 +326,19 @@ export function Contact() {
                     </div>
                   </div>
 
+                  {/* Company + Service */}
                   <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+
+                    {/* Company */}
                     <div>
-                      <label htmlFor="company" className={labelClass}>
+                      <label
+                        htmlFor="company"
+                        className={labelClass}
+                      >
                         Company{' '}
-                        <span className="text-slate-600">(optional)</span>
+                        <span className="text-slate-600">
+                          (optional)
+                        </span>
                       </label>
 
                       <input
@@ -316,11 +348,16 @@ export function Contact() {
                         autoComplete="organization"
                         className={fieldClass}
                         placeholder="Company name"
+                        disabled={submitting}
                       />
                     </div>
 
+                    {/* Service */}
                     <div>
-                      <label htmlFor="service" className={labelClass}>
+                      <label
+                        htmlFor="service"
+                        className={labelClass}
+                      >
                         Service Needed
                       </label>
 
@@ -329,6 +366,7 @@ export function Contact() {
                         name="service"
                         defaultValue=""
                         className={fieldClass}
+                        disabled={submitting}
                       >
                         <option value="" disabled>
                           Select a service
@@ -343,9 +381,14 @@ export function Contact() {
                     </div>
                   </div>
 
+                  {/* Project Details */}
                   <div>
-                    <label htmlFor="details" className={labelClass}>
-                      Project Details <span className="text-sky-400">*</span>
+                    <label
+                      htmlFor="details"
+                      className={labelClass}
+                    >
+                      Project Details{' '}
+                      <span className="text-sky-400">*</span>
                     </label>
 
                     <textarea
@@ -356,6 +399,7 @@ export function Contact() {
                       aria-invalid={!!errors.details}
                       className={`${fieldClass} resize-y`}
                       placeholder="Tell us a little about your idea, requirements or business challenge..."
+                      disabled={submitting}
                     />
 
                     {errors.details && (
@@ -365,8 +409,7 @@ export function Contact() {
                     )}
                   </div>
 
-
-                  {/* Exact EZAC button style */}
+                  {/* Submit button */}
                   <button
                     type="submit"
                     disabled={submitting}
@@ -403,3 +446,4 @@ export function Contact() {
     </section>
   )
 }
+
