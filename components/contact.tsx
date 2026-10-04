@@ -268,7 +268,7 @@ export function Contact() {
                         aria-required="true"
                         aria-invalid={!!errors.name}
                         className={fieldClass}
-                        placeholder="Jane Doe"
+                        placeholder="Hannah Williams"
                       />
 
                       {errors.name && (
@@ -291,7 +291,7 @@ export function Contact() {
                         aria-required="true"
                         aria-invalid={!!errors.email}
                         className={fieldClass}
-                        placeholder="jane@company.com"
+                        placeholder="hannah@company.com"
                       />
 
                       {errors.email && (
