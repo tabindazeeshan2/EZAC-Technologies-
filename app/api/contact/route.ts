@@ -36,7 +36,7 @@ export async function POST(req: Request) {
 
     const { error } = await resend.emails.send({
       from: 'EZAC Contact Form <onboarding@resend.dev>',
-      to: ['info@ezactechnologies.com'],
+      to: ['ezactechnologies@gmail.com'],
       replyTo: email,
       subject: `New Inquiry from ${name}`,
       html: `

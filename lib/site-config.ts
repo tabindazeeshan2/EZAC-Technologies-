@@ -17,7 +17,7 @@ export const site = {
   tagline: 'Innovate • Build • Elevate',
   statement: 'Building Smart Solutions for a Better Tomorrow',
   description: 'Building smart digital solutions for a better tomorrow.',
-  email: 'info@ezactechnologies.com',
+  email: 'ezactechnologies@outlook.com',
   linkedin: 'https://www.linkedin.com/company/ezac-technologies',
   instagram: 'https://www.instagram.com/ezactechnologies',
   instagramHandle: '@ezactechnologies',
