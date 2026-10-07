@@ -411,11 +411,11 @@ function InfrastructureHub() {
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_8%,rgba(3,10,24,0.42)_55%,rgba(3,10,24,0.96)_100%)]" />
 
           <div className="relative z-20 grid grid-cols-3 gap-1.5 min-[400px]:gap-2">
-            <HubMetric icon={Laptop} label="DEVICES" value="24" />
+            <HubMetric icon={Laptop} label="DEVICES" value="CONNECTED" />
 
-            <HubMetric icon={Wifi} label="NETWORK" value="ONLINE" />
+<HubMetric icon={Wifi} label="NETWORK" value="ONLINE" />
 
-            <HubMetric icon={ShieldCheck} label="SECURITY" value="ACTIVE" />
+<HubMetric icon={ShieldCheck} label="SECURITY" value="ACTIVE" />
           </div>
 
           <div className="relative z-20 mx-auto mt-7 grid h-[250px] w-full max-w-[470px] grid-cols-[minmax(0,1fr)_94px_minmax(0,1fr)] grid-rows-[1fr_1fr] items-center gap-x-1.5 gap-y-2 min-[400px]:grid-cols-[minmax(0,1fr)_110px_minmax(0,1fr)] min-[400px]:gap-x-2 sm:mt-8 sm:h-[290px] sm:grid-cols-[1fr_150px_1fr] sm:gap-x-3 sm:gap-y-3">
@@ -483,11 +483,20 @@ function InfrastructureHub() {
               </span>
             </div>
 
-            <HubStatus label="Network infrastructure" value="96%" />
+            <HubStatus
+  label="Network infrastructure"
+  value="CONNECTED"
+/>
 
-            <HubStatus label="Hardware environment" value="92%" />
+<HubStatus
+  label="Hardware environment"
+  value="READY"
+/>
 
-            <HubStatus label="Support coverage" value="100%" />
+<HubStatus
+  label="Support coverage"
+  value="AVAILABLE"
+/>
           </div>
         </div>
 
@@ -615,16 +624,14 @@ function HubStatus({
           {label}
         </span>
 
-        <div className="hidden w-32 sm:block">
-          <div className="h-1 overflow-hidden rounded-full bg-white/[0.04]">
-            <div
-              className="h-full rounded-full bg-gradient-to-r from-sky-500/80 to-cyan-400/90"
-              style={{ width: value }}
-            />
-          </div>
+        <div className="hidden w-32 gap-1 sm:flex">
+          <span className="h-1 flex-1 rounded-full bg-sky-400/70" />
+          <span className="h-1 flex-1 rounded-full bg-sky-400/50" />
+          <span className="h-1 flex-1 rounded-full bg-sky-400/30" />
+          <span className="h-1 flex-1 rounded-full bg-sky-400/15" />
         </div>
 
-        <span className="w-8 text-right font-mono text-[7px] text-sky-400/70 sm:w-9 sm:text-[8px]">
+        <span className="w-auto text-right font-mono text-[7px] uppercase tracking-[0.08em] text-sky-400/70 sm:text-[8px]">
           {value}
         </span>
       </div>
