@@ -12,16 +12,52 @@ export function Navbar() {
   const pathname = usePathname()
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState('home')
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20)
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20)
+
+      if (pathname !== '/') return
+
+      const sections = navLinks
+        .filter((link) => link.href.startsWith('#'))
+        .map((link) => link.href.replace('#', ''))
+        .map((id) => document.getElementById(id))
+        .filter(Boolean) as HTMLElement[]
+
+      if (sections.length === 0) return
+
+      const offset = 140
+      let currentSection = sections[0].id
+
+      for (const section of sections) {
+        const top = section.getBoundingClientRect().top
+
+        if (top <= offset) {
+          currentSection = section.id
+        } else {
+          break
+        }
+      }
+
+      setActiveSection(currentSection)
+    }
+
     handleScroll()
+
     window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+    window.addEventListener('resize', handleScroll)
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', handleScroll)
+    }
+  }, [pathname])
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : ''
+
     return () => {
       document.body.style.overflow = ''
     }
@@ -29,22 +65,35 @@ export function Navbar() {
 
   useEffect(() => {
     if (!open) return
+
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setOpen(false)
     }
+
     window.addEventListener('keydown', handleKeyDown)
+
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [open])
 
   const getHref = (href: string) => {
-    if (href.startsWith('#') && pathname !== '/') return `/${href}`
+    if (href.startsWith('#') && pathname !== '/') {
+      return `/${href}`
+    }
+
     return href
   }
 
   const isActive = (href: string) => {
-    if (href === '#home' || href === '/') return pathname === '/'
-    if (!href.startsWith('#')) return pathname === href
-    return false
+    if (href === '#home' || href === '/') {
+      return pathname === '/' && activeSection === 'home'
+    }
+
+    if (href.startsWith('#')) {
+      const sectionId = href.replace('#', '')
+      return pathname === '/' && activeSection === sectionId
+    }
+
+    return pathname === href || pathname.startsWith(`${href}/`)
   }
 
   return (
@@ -57,22 +106,26 @@ export function Navbar() {
       )}
     >
       <nav className="mx-auto flex h-[76px] max-w-[1600px] items-center justify-between px-6 sm:px-8 lg:px-12 xl:px-16">
-        
+
         <Logo size="default" className="relative z-10" />
 
         <ul className="hidden items-center gap-10 lg:flex">
           {navLinks.map((link) => {
             const active = isActive(link.href)
+
             return (
               <li key={link.href}>
                 <a
                   href={getHref(link.href)}
                   className={cn(
                     'group relative flex h-[76px] items-center text-[13.5px] font-medium tracking-wide transition-colors duration-200',
-                    active ? 'text-white' : 'text-white/50 hover:text-white'
+                    active
+                      ? 'text-white'
+                      : 'text-white/50 hover:text-white'
                   )}
                 >
                   {link.label}
+
                   <span
                     className={cn(
                       'absolute bottom-[22px] left-1/2 h-[2px] -translate-x-1/2 rounded-full bg-[#079cff] shadow-[0_0_10px_rgba(7,156,255,0.7)] transition-all duration-300',
@@ -106,7 +159,6 @@ export function Navbar() {
           </GlowButton>
         </div>
 
-        {/* Mobile toggle */}
         <button
           type="button"
           aria-label={open ? 'Close menu' : 'Open menu'}
@@ -118,17 +170,19 @@ export function Navbar() {
         </button>
       </nav>
 
-      {/* Mobile menu */}
       <div
         className={cn(
           'border-t border-white/[0.07] bg-[#020817]/97 backdrop-blur-2xl transition-all duration-300 lg:hidden',
-          open ? 'max-h-[600px] opacity-100' : 'max-h-0 overflow-hidden opacity-0'
+          open
+            ? 'max-h-[600px] opacity-100'
+            : 'max-h-0 overflow-hidden opacity-0'
         )}
       >
         <div className="px-6 py-6 sm:px-8">
           <div className="space-y-1">
             {navLinks.map((link) => {
               const active = isActive(link.href)
+
               return (
                 <a
                   key={link.href}
