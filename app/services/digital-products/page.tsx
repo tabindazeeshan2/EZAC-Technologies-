@@ -394,11 +394,13 @@ export default function DigitalProductsPage() {
                           </div>
 
 
-                          <div className="mt-3 h-1 overflow-hidden rounded-full bg-white/[0.05]">
-
-                            <div className="h-full w-[98%] rounded-full bg-sky-400 shadow-[0_0_8px_rgba(56,189,248,0.7)]" />
-
-                          </div>
+                          <div className="mt-3 flex gap-1.5">
+    <span className="h-1 flex-1 rounded-full bg-sky-400" />
+    <span className="h-1 flex-1 rounded-full bg-sky-400" />
+    <span className="h-1 flex-1 rounded-full bg-sky-400/70" />
+    <span className="h-1 flex-1 rounded-full bg-sky-400/40" />
+    <span className="h-1 flex-1 rounded-full bg-white/[0.06]" />
+  </div>
 
                         </div>
 
