@@ -369,9 +369,9 @@ function InfrastructurePanel() {
 
           {/* TOP STATUS */}
           <div className="relative z-10 grid grid-cols-3 gap-2">
-            <StatusMini label="CPU" value="24%" />
-            <StatusMini label="MEMORY" value="41%" />
-            <StatusMini label="UPTIME" value="99.99%" />
+            <StatusMini label="CPU" value="ACTIVE" />
+<StatusMini label="MEMORY" value="READY" />
+<StatusMini label="SYSTEM" value="OPERATIONAL" />
           </div>
 
           {/* SERVER RACK */}
@@ -399,28 +399,24 @@ function InfrastructurePanel() {
 
               <div className="space-y-1.5">
                 <ServerRow
-                  name="Application"
-                  detail="Running"
-                  load="32%"
-                />
+  name="Application"
+  detail="Running"
+/>
 
-                <ServerRow
-                  name="Database"
-                  detail="Connected"
-                  load="18%"
-                />
+<ServerRow
+  name="Database"
+  detail="Connected"
+/>
 
-                <ServerRow
-                  name="Storage"
-                  detail="Protected"
-                  load="46%"
-                />
+<ServerRow
+  name="Storage"
+  detail="Protected"
+/>
 
-                <ServerRow
-                  name="Deployment"
-                  detail="Ready"
-                  load="12%"
-                />
+<ServerRow
+  name="Deployment"
+  detail="Ready"
+/>
               </div>
             </div>
           </div>
@@ -556,11 +552,9 @@ function StatusMini({
 function ServerRow({
   name,
   detail,
-  load,
 }: {
   name: string;
   detail: string;
-  load: string;
 }) {
   return (
     <div className="flex items-center gap-2.5 rounded-xl border border-white/[0.045] bg-[#020817]/65 px-2.5 py-2">
@@ -577,22 +571,18 @@ function ServerRow({
             {name}
           </span>
 
-          <span className="font-mono text-[7px] text-slate-600">
-            {load}
+          <span className="font-mono text-[7px] uppercase tracking-[0.12em] text-emerald-400/60">
+            {detail}
           </span>
         </div>
 
-        <div className="mt-1.5 h-1 overflow-hidden rounded-full bg-white/[0.04]">
-          <div
-            className="h-full rounded-full bg-sky-400/50"
-            style={{ width: load }}
-          />
+        <div className="mt-1.5 flex gap-1">
+          <span className="h-1 flex-1 rounded-full bg-sky-400/45" />
+          <span className="h-1 flex-1 rounded-full bg-sky-400/30" />
+          <span className="h-1 flex-1 rounded-full bg-sky-400/20" />
+          <span className="h-1 flex-1 rounded-full bg-white/[0.04]" />
         </div>
       </div>
-
-      <span className="hidden font-mono text-[7px] uppercase tracking-[0.12em] text-emerald-400/60 sm:block">
-        {detail}
-      </span>
     </div>
   );
 }
