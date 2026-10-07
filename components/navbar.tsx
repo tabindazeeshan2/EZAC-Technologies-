@@ -1,7 +1,11 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { ArrowRight, Menu, Search, X } from 'lucide-react'
+import {
+  ArrowRight,
+  Menu,
+  X,
+} from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import { Logo } from '@/components/logo'
 import { GlowButton } from '@/components/glow-button'
@@ -10,48 +14,72 @@ import { cn } from '@/lib/utils'
 
 export function Navbar() {
   const pathname = usePathname()
+
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
 
   useEffect(() => {
+    if (pathname !== '/') {
+      return
+    }
+
     const handleScroll = () => {
       setScrolled(window.scrollY > 20)
 
-      if (pathname !== '/') return
-
-      const sections = navLinks
+      const sectionIds = navLinks
         .filter((link) => link.href.startsWith('#'))
-        .map((link) => link.href.replace('#', ''))
+        .map((link) => link.href.substring(1))
+
+      const sections = sectionIds
         .map((id) => document.getElementById(id))
-        .filter(Boolean) as HTMLElement[]
+        .filter((section): section is HTMLElement => section !== null)
 
-      if (sections.length === 0) return
-
-      const offset = 140
-      let currentSection = sections[0].id
-
-      for (const section of sections) {
-        const top = section.getBoundingClientRect().top
-
-        if (top <= offset) {
-          currentSection = section.id
-        } else {
-          break
-        }
+      if (!sections.length) {
+        return
       }
 
-      setActiveSection(currentSection)
+      const navbarOffset = 120
+
+      let closestSection = sections[0]
+      let closestDistance = Infinity
+
+      sections.forEach((section) => {
+        const rect = section.getBoundingClientRect()
+
+        const distance = Math.abs(rect.top - navbarOffset)
+
+        if (rect.top <= navbarOffset && distance < closestDistance) {
+          closestSection = section
+          closestDistance = distance
+        }
+      })
+
+      if (window.scrollY < 80) {
+        setActiveSection('home')
+        return
+      }
+
+      setActiveSection(closestSection.id)
     }
 
     handleScroll()
 
-    window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('scroll', handleScroll, {
+      passive: true,
+    })
+
     window.addEventListener('resize', handleScroll)
 
     return () => {
       window.removeEventListener('scroll', handleScroll)
       window.removeEventListener('resize', handleScroll)
+    }
+  }, [pathname])
+
+  useEffect(() => {
+    if (pathname !== '/') {
+      setActiveSection('')
     }
   }, [pathname])
 
@@ -64,15 +92,21 @@ export function Navbar() {
   }, [open])
 
   useEffect(() => {
-    if (!open) return
+    if (!open) {
+      return
+    }
 
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setOpen(false)
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setOpen(false)
+      }
     }
 
     window.addEventListener('keydown', handleKeyDown)
 
-    return () => window.removeEventListener('keydown', handleKeyDown)
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
   }, [open])
 
   const getHref = (href: string) => {
@@ -89,11 +123,15 @@ export function Navbar() {
     }
 
     if (href.startsWith('#')) {
-      const sectionId = href.replace('#', '')
+      const sectionId = href.substring(1)
+
       return pathname === '/' && activeSection === sectionId
     }
 
-    return pathname === href || pathname.startsWith(`${href}/`)
+    return (
+      pathname === href ||
+      pathname.startsWith(`${href}/`)
+    )
   }
 
   return (
@@ -107,7 +145,10 @@ export function Navbar() {
     >
       <nav className="mx-auto flex h-[76px] max-w-[1600px] items-center justify-between px-6 sm:px-8 lg:px-12 xl:px-16">
 
-        <Logo size="default" className="relative z-10" />
+        <Logo
+          size="default"
+          className="relative z-10"
+        />
 
         <ul className="hidden items-center gap-10 lg:flex">
           {navLinks.map((link) => {
@@ -140,14 +181,7 @@ export function Navbar() {
           })}
         </ul>
 
-        <div className="hidden items-center gap-3 lg:flex">
-          <button
-            type="button"
-            aria-label="Search"
-            className="flex size-9 items-center justify-center rounded-full text-white/45 transition-all duration-200 hover:bg-white/[0.06] hover:text-white"
-          >
-            <Search className="size-[17px]" strokeWidth={1.6} />
-          </button>
+        <div className="hidden items-center lg:flex">
 
           <GlowButton
             href={getHref('#contact')}
@@ -155,19 +189,26 @@ export function Navbar() {
             className="h-[40px] rounded-2xl bg-[#078cff] px-5 text-[13px] font-semibold shadow-[0_0_18px_rgba(0,140,255,0.25)] transition-all duration-300 hover:bg-[#159cff] hover:shadow-[0_0_28px_rgba(0,140,255,0.4)]"
           >
             Get Started
+
             <ArrowRight className="ml-1.5 size-3.5" />
           </GlowButton>
+
         </div>
 
         <button
           type="button"
           aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
+          onClick={() => setOpen((value) => !value)}
           className="flex size-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-white transition-all hover:border-blue-400/25 hover:bg-blue-500/[0.08] lg:hidden"
         >
-          {open ? <X className="size-5" /> : <Menu className="size-5" />}
+          {open ? (
+            <X className="size-5" />
+          ) : (
+            <Menu className="size-5" />
+          )}
         </button>
+
       </nav>
 
       <div
@@ -179,6 +220,7 @@ export function Navbar() {
         )}
       >
         <div className="px-6 py-6 sm:px-8">
+
           <div className="space-y-1">
             {navLinks.map((link) => {
               const active = isActive(link.href)
@@ -209,9 +251,11 @@ export function Navbar() {
               onClick={() => setOpen(false)}
             >
               Get Started
+
               <ArrowRight className="ml-2 size-4" />
             </GlowButton>
           </div>
+
         </div>
       </div>
     </header>
