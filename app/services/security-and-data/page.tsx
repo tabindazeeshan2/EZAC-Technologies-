@@ -449,21 +449,20 @@ function SecurityDataPanel() {
                 Monitoring
               </span>
             </div>
+<SecurityStatus
+  label="Threat protection"
+  value="ACTIVE"
+/>
 
-            <SecurityStatus
-              label="Threat protection"
-              value="98%"
-            />
+<SecurityStatus
+  label="Data availability"
+  value="READY"
+/>
 
-            <SecurityStatus
-              label="Data availability"
-              value="99%"
-            />
-
-            <SecurityStatus
-              label="System connectivity"
-              value="96%"
-            />
+<SecurityStatus
+  label="System connectivity"
+  value="CONNECTED"
+/>
           </div>
         </div>
 
@@ -569,16 +568,14 @@ function SecurityStatus({
           {label}
         </span>
 
-        <div className="hidden w-28 sm:block">
-          <div className="h-1 overflow-hidden rounded-full bg-white/[0.04]">
-            <div
-              className="h-full rounded-full bg-gradient-to-r from-sky-500/80 to-cyan-400/90"
-              style={{ width: value }}
-            />
-          </div>
+        <div className="hidden w-28 gap-1 sm:flex">
+          <span className="h-1 flex-1 rounded-full bg-sky-400/70" />
+          <span className="h-1 flex-1 rounded-full bg-sky-400/50" />
+          <span className="h-1 flex-1 rounded-full bg-sky-400/30" />
+          <span className="h-1 flex-1 rounded-full bg-sky-400/15" />
         </div>
 
-        <span className="w-9 text-right font-mono text-[8px] text-sky-400/70">
+        <span className="w-auto text-right font-mono text-[8px] uppercase tracking-[0.08em] text-sky-400/70">
           {value}
         </span>
       </div>
