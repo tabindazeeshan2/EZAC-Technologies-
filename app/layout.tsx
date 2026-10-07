@@ -62,10 +62,7 @@ export const metadata: Metadata = {
     images: ['/ezac-logo.jpeg'],
   },
 
-  icons: {
-    icon: '/ezac-logo.jpeg',
-    apple: '/ezac-logo.jpeg',
-  },
+  
 
   generator: 'v0.app',
 }
