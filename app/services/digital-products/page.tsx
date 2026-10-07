@@ -381,7 +381,7 @@ export default function DigitalProductsPage() {
                           <div className="flex items-center justify-between">
 
                             <span className="font-mono text-[7px] uppercase tracking-[0.2em] text-slate-600">
-                              Performance
+                              System Status
                             </span>
 
                             <ArrowUpRight className="size-3 text-sky-400" />
@@ -390,7 +390,7 @@ export default function DigitalProductsPage() {
 
 
                           <div className="mt-4 text-xl font-semibold text-white">
-                            98%
+                            Optimized
                           </div>
 
 

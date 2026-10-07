@@ -364,7 +364,7 @@ export default function AIAutomationPage() {
                     />
 
                     <AIProcessingMetric
-                      label="REASON"
+                      label="OPTIMIZED"
                       value="98.4%"
                       active
                     />
