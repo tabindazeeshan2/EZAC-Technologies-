@@ -11,7 +11,7 @@ const inter = Inter({
   display: 'swap',
 })
 
-const siteUrl = 'https://ezactechnologies.com'
+const siteUrl = 'https://www.ezactechnologies.com'
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -23,19 +23,6 @@ export const metadata: Metadata = {
 
   description:
     'EZAC Technologies builds modern websites, mobile applications, custom software and AI-powered business automation solutions.',
-
-  keywords: [
-    'EZAC Technologies',
-    'web development',
-    'mobile app development',
-    'custom software',
-    'AI automation',
-    'digital solutions',
-  ],
-
-  alternates: {
-    canonical: '/',
-  },
 
   openGraph: {
     type: 'website',
@@ -62,11 +49,8 @@ export const metadata: Metadata = {
     images: ['/ezac-logo.jpeg'],
   },
 
-  
-
   generator: 'v0.app',
 }
-
 export const viewport: Viewport = {
   colorScheme: 'dark',
   themeColor: '#020817',
