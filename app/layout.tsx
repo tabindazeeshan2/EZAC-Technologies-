@@ -63,9 +63,9 @@ export const metadata: Metadata = {
   },
 
   icons: {
-    icon: '/ezac-logo.jpeg',
-    apple: '/ezac-logo.jpeg',
-  },
+  icon: '/ezac-logo.png',
+  apple: '/ezac-logo.png',
+},
 
   generator: 'v0.app',
 }
