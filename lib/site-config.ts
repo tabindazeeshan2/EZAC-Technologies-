@@ -19,7 +19,7 @@ export const site = {
   description: 'Building smart digital solutions for a better tomorrow.',
   email: 'info@ezactechnologies.com',
   linkedin: 'https://www.linkedin.com/company/ezac-technologies',
-  instagram: 'https://www.instagram.com/ezactechnologies',
+  instagram: 'https://www.instagram.com/ezactechnologies_',
   instagramHandle: '@ezactechnologies',
   linkedinName: 'EZAC Technologies',
 }
