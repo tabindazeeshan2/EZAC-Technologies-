@@ -2,7 +2,6 @@
 
 import {
     ArrowRight,
-    BrainCircuit,
     CheckCircle2,
     ChevronDown,
     Cloud,
@@ -11,14 +10,12 @@ import {
     Palette,
     Rocket,
     Server,
-    ShieldCheck,
     Smartphone,
     Sparkles,
     Users,
     Bot,
     BriefcaseBusiness,
     TrendingUp,
-    Mail,
 } from 'lucide-react'
 
 const jobs = [
@@ -39,6 +36,7 @@ const jobs = [
             'Publish applications through Google Play Console and maintain production releases.',
         ],
         requirements: [
+            'Bachelor’s degree in Computer Science, Software Engineering, Information Technology, or a related field.',
             'Practical knowledge of Kotlin or Java and the Android SDK.',
             'Experience with Android Studio, Gradle, Git, and debugging.',
             'Understanding of REST APIs, JSON, authentication, and local data storage.',
@@ -66,6 +64,7 @@ const jobs = [
             'Manage TestFlight distribution, App Store Connect submissions, review feedback, and production updates.',
         ],
         requirements: [
+            'Bachelor’s degree in Computer Science, Software Engineering, Information Technology, or a related field.',
             'Practical knowledge of Swift and native iOS development.',
             'Experience with Xcode, Git, debugging, and application lifecycle management.',
             'Understanding of SwiftUI or UIKit, REST APIs, JSON, and data persistence.',
@@ -93,6 +92,7 @@ const jobs = [
             'Configure iOS builds, signing, TestFlight, and App Store submissions.',
         ],
         requirements: [
+            'Bachelor’s degree in Computer Science, Software Engineering, Information Technology, or a related field.',
             'Knowledge of Flutter, Dart, and mobile application architecture.',
             'Experience with state management, REST APIs, and Git.',
             'Understanding of Android Studio, Xcode, and platform-specific configuration.',
@@ -119,6 +119,7 @@ const jobs = [
             'Configure domains, DNS, SSL, environment variables, and production integrations.',
         ],
         requirements: [
+            'Bachelor’s degree in Computer Science, Software Engineering, Information Technology, or a related field.',
             'Knowledge of JavaScript or TypeScript, React, and modern web development.',
             'Experience with Next.js or a comparable web framework.',
             'Understanding of backend development, REST APIs, and SQL or NoSQL databases.',
@@ -146,6 +147,7 @@ const jobs = [
             'Deploy, monitor, document, and maintain AI applications.',
         ],
         requirements: [
+            'Bachelor’s degree in Computer Science, Artificial Intelligence, Data Science, Software Engineering, or a related field.',
             'Knowledge of Python or JavaScript/TypeScript.',
             'Experience with REST APIs, JSON, authentication, and backend integrations.',
             'Understanding of LLM APIs, prompt engineering, and AI application development.',
@@ -173,6 +175,7 @@ const jobs = [
             'Deploy backend services and maintain production environments.',
         ],
         requirements: [
+            'Bachelor’s degree in Computer Science, Software Engineering, Information Technology, or a related field.',
             'Knowledge of Node.js or Python and a relevant backend framework.',
             'Experience with REST APIs and SQL or NoSQL databases.',
             'Understanding of authentication, API security, and data validation.',
@@ -200,6 +203,7 @@ const jobs = [
             'Collaborate with developers and prepare design handoff documentation.',
         ],
         requirements: [
+            'Bachelor’s degree in UI/UX Design, Interaction Design, Graphic Design, Human-Computer Interaction, or a related field.',
             'Knowledge of Figma or comparable design tools.',
             'Understanding of UX principles, information architecture, and interaction design.',
             'Knowledge of responsive layouts, typography, accessibility, and design systems.',
@@ -227,6 +231,7 @@ const jobs = [
             'Implement backups, recovery procedures, access controls, and security practices.',
         ],
         requirements: [
+            'Bachelor’s degree in Computer Science, Information Technology, Cloud Computing, Network Engineering, or a related field.',
             'Knowledge of Linux administration, networking, and server fundamentals.',
             'Experience with cloud platforms, VPS environments, or managed hosting.',
             'Understanding of Git, CI/CD, and deployment workflows.',
@@ -317,26 +322,26 @@ export default function CareersPage() {
     return (
         <main className="min-h-screen overflow-hidden bg-[#020817] text-white">
             {/* Hero */}
-            <section className="relative px-6 pb-20 pt-36 sm:px-10 sm:pt-40 lg:px-16">
+            <section className="relative px-6 pb-24 pt-36 sm:px-10 sm:pt-44 lg:px-16">
                 {/* Soft ambient glows */}
-                <div className="pointer-events-none absolute left-1/2 top-16 -z-0 size-[28rem] -translate-x-1/2 rounded-full bg-blue-600/20 blur-[140px]" />
-                <div className="pointer-events-none absolute -left-20 top-40 -z-0 size-64 rounded-full bg-sky-500/10 blur-[100px]" />
-                <div className="pointer-events-none absolute -right-16 bottom-10 -z-0 size-72 rounded-full bg-blue-500/10 blur-[110px]" />
+                <div className="pointer-events-none absolute left-1/2 top-10 -z-0 size-[32rem] -translate-x-1/2 rounded-full bg-blue-600/25 blur-[160px]" />
+                <div className="pointer-events-none absolute -left-24 top-48 -z-0 size-72 rounded-full bg-sky-500/15 blur-[120px]" />
+                <div className="pointer-events-none absolute -right-20 bottom-0 -z-0 size-80 rounded-full bg-blue-500/12 blur-[130px]" />
 
-                <div className="relative mx-auto max-w-5xl text-center">
-                    <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-blue-400/25 bg-blue-500/[0.1] px-4 py-2 text-sm text-blue-300 shadow-[0_0_20px_-6px_rgba(59,130,246,0.35)]">
-                        <Sparkles className="size-4" />
+                <div className="relative mx-auto max-w-6xl text-center">
+                    <div className="mb-9 inline-flex items-center gap-2.5 rounded-full border border-blue-400/25 bg-blue-500/[0.08] px-5 py-2.5 text-sm font-medium text-blue-200 shadow-[0_0_40px_-12px_rgba(59,130,246,0.5)] backdrop-blur-md">
+                        <Sparkles className="size-4 text-blue-300" />
                         Careers at EZAC Technologies
                     </div>
 
-                    <h1 className="text-4xl font-semibold tracking-tight sm:text-6xl lg:text-7xl">
+                    <h1 className="text-4xl font-bold tracking-[-0.045em] sm:text-6xl lg:text-7xl">
                         Build Your Future.
-                        <span className="mt-2 block bg-gradient-to-r from-blue-400 via-sky-300 to-blue-500 bg-clip-text text-transparent">
+                        <span className="mt-3 block bg-gradient-to-r from-blue-400 via-sky-300 to-blue-500 bg-clip-text text-transparent">
                             Create What&apos;s Next.
                         </span>
                     </h1>
 
-                    <p className="mx-auto mt-7 max-w-2xl text-base leading-8 text-slate-400 sm:text-lg">
+                    <p className="mx-auto mt-8 max-w-2xl text-base leading-8 text-slate-300/85 sm:text-lg">
                         Help us build smarter digital products, mobile
                         applications, AI-powered solutions, and modern software
                         for businesses.
@@ -344,26 +349,29 @@ export default function CareersPage() {
 
                     <a
                         href="#open-positions"
-                        className="mt-9 inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-[#078cff] px-7 text-sm font-semibold shadow-[0_8px_30px_-8px_rgba(7,140,255,0.55)] transition hover:bg-[#159cff] hover:shadow-[0_10px_36px_-8px_rgba(21,156,255,0.6)]"
+                        className="mt-10 inline-flex h-12 items-center justify-center gap-2.5 rounded-xl bg-[#078cff] px-8 text-sm font-semibold shadow-[0_12px_40px_-12px_rgba(7,140,255,0.75)] transition-all duration-300 hover:-translate-y-1 hover:bg-[#159cff] hover:shadow-[0_16px_48px_-12px_rgba(21,156,255,0.8)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2 focus-visible:ring-offset-[#020817]"
                     >
                         Explore Job Openings
                         <ArrowRight className="size-4" />
                     </a>
 
                     {/* Values */}
-                    <div className="mt-16 grid gap-4 text-left sm:grid-cols-3">
+                    <div className="mt-20 grid gap-6 text-left sm:grid-cols-3">
                         {values.map((value) => (
                             <div
                                 key={value.title}
-                                className="group rounded-2xl border border-white/[0.08] bg-white/[0.03] p-5 transition duration-300 hover:-translate-y-0.5 hover:border-blue-400/30 hover:bg-white/[0.045]"
+                                className="group relative overflow-hidden rounded-2xl border border-white/[0.08] bg-gradient-to-b from-white/[0.06] to-white/[0.02] p-7 shadow-[0_20px_50px_-30px_rgba(0,0,0,0.9)] transition-all duration-500 hover:-translate-y-1.5 hover:border-blue-400/30 hover:from-blue-500/[0.09] hover:to-white/[0.03] hover:shadow-[0_25px_60px_-25px_rgba(7,140,255,0.25)]"
                             >
-                                <div className="mb-3 flex size-10 items-center justify-center rounded-xl border border-blue-400/15 bg-blue-500/[0.08] transition group-hover:border-blue-400/25 group-hover:bg-blue-500/[0.12]">
-                                    <value.icon className="size-5 text-blue-400" />
+                                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 via-transparent to-sky-500/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                                <div className="relative">
+                                    <div className="mb-5 flex size-12 items-center justify-center rounded-xl border border-blue-400/20 bg-blue-500/[0.12] shadow-inner transition-all duration-300 group-hover:border-blue-400/40 group-hover:bg-blue-500/[0.18] group-hover:shadow-[0_0_20px_-4px_rgba(59,130,246,0.4)]">
+                                        <value.icon className="size-5 text-blue-400" />
+                                    </div>
+                                    <h2 className="text-lg font-semibold tracking-tight">{value.title}</h2>
+                                    <p className="mt-2.5 text-sm leading-6 text-slate-400">
+                                        {value.description}
+                                    </p>
                                 </div>
-                                <h2 className="font-semibold">{value.title}</h2>
-                                <p className="mt-2 text-sm leading-6 text-slate-400">
-                                    {value.description}
-                                </p>
                             </div>
                         ))}
                     </div>
@@ -371,78 +379,127 @@ export default function CareersPage() {
             </section>
 
             {/* Why EZAC */}
-            <section
-                id="why-ezac"
-                className="border-y border-white/[0.07] bg-white/[0.02] px-6 py-16 sm:px-10 lg:px-16"
-            >
-                <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-2 md:items-center">
-                    <div>
-                        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-blue-400">
-                            Grow With Us
-                        </p>
-                        <h2 className="text-2xl font-semibold leading-snug sm:text-3xl">
-                            Good ideas deserve great execution.
-                        </h2>
-                        <div className="mt-5 h-1 w-16 rounded-full bg-gradient-to-r from-blue-500 to-sky-400" />
-                    </div>
+            
+{/* Why EZAC */}
+<section
+  id="why-ezac"
+  className="relative isolate overflow-hidden border-y border-white/[0.07] bg-[#040b19] px-6 py-20 sm:px-10 sm:py-24 lg:px-16"
+>
+  {/* Subtle background glow */}
+  <div
+    aria-hidden="true"
+    className="pointer-events-none absolute left-1/4 top-1/2 -z-10 h-72 w-72 -translate-y-1/2 rounded-full bg-blue-600/[0.10] blur-[110px]"
+  />
+  <div
+    aria-hidden="true"
+    className="pointer-events-none absolute right-0 top-0 -z-10 h-64 w-64 rounded-full bg-sky-500/[0.06] blur-[100px]"
+  />
 
-                    <p className="text-sm leading-7 text-slate-400 sm:text-base">
-                        At EZAC Technologies, our work spans web development,
-                        mobile applications, AI, automation, and cloud
-                        infrastructure. We value practical problem-solving,
-                        technical ownership, clear communication, and reliable
-                        delivery from development through deployment.
-                    </p>
-                </div>
-            </section>
+  <div className="mx-auto max-w-6xl">
+    <div className="relative overflow-hidden rounded-3xl border border-white/[0.10] bg-gradient-to-br from-[#0b1830] via-[#071225] to-[#050d1b] p-7 shadow-[0_24px_80px_-35px_rgba(0,0,0,0.9)] sm:p-10 lg:p-14">
+      {/* Decorative accent */}
+      <div
+        aria-hidden="true"
+        className="absolute right-0 top-0 h-40 w-40 rounded-bl-full bg-blue-500/[0.05]"
+      />
 
-            {/* Open Positions — layout kept the same */}
+      <div className="relative grid items-center gap-10 md:grid-cols-[0.9fr_1.1fr] md:gap-14">
+        {/* Left column */}
+        <div>
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-blue-400/20 bg-blue-500/[0.08] px-3.5 py-2">
+            <span className="h-1.5 w-1.5 rounded-full bg-sky-400 shadow-[0_0_10px_rgba(56,189,248,0.8)]" />
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-300">
+              Grow With Us
+            </p>
+          </div>
+
+          <h2 className="max-w-md text-3xl font-semibold leading-tight tracking-tight text-white sm:text-4xl lg:text-[2.65rem]">
+            Good ideas deserve{" "}
+            <span className="bg-gradient-to-r from-blue-400 to-sky-300 bg-clip-text text-transparent">
+              great execution.
+            </span>
+          </h2>
+
+          <div className="mt-7 flex items-center gap-3">
+            <div className="h-1 w-14 rounded-full bg-gradient-to-r from-blue-500 to-sky-400" />
+            <div className="h-1 w-3 rounded-full bg-blue-400/30" />
+            <div className="h-1 w-2 rounded-full bg-blue-400/15" />
+          </div>
+        </div>
+
+        {/* Right column */}
+        <div className="md:border-l md:border-white/[0.09] md:pl-10 lg:pl-12">
+          <p className="text-base leading-8 text-slate-300/90 sm:text-[1.05rem] sm:leading-9">
+            At EZAC Technologies, our work spans web development,
+            mobile applications, AI, automation, and cloud
+            infrastructure. We value practical problem-solving,
+            technical ownership, clear communication, and reliable
+            delivery from development through deployment.
+          </p>
+
+          <div className="mt-7 flex flex-wrap gap-2">
+            {["Problem-solving", "Technical ownership", "Reliable delivery"].map(
+              (item) => (
+                <span
+                  key={item}
+                  className="rounded-full border border-white/[0.09] bg-white/[0.035] px-3 py-1.5 text-xs font-medium text-slate-300"
+                >
+                  {item}
+                </span>
+              )
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+            {/* Open Positions */}
             <section
                 id="open-positions"
-                className="scroll-mt-24 px-6 py-20 sm:px-10 lg:px-16"
+                className="scroll-mt-24 px-6 py-28 sm:px-10 lg:px-16"
             >
-                <div className="mx-auto max-w-5xl">
-                    <div className="mb-10">
-                        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-blue-400">
+                <div className="mx-auto max-w-6xl">
+                    <div className="mb-12 border-b border-white/[0.07] pb-10">
+                        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.22em] text-blue-400">
                             Career Opportunities
                         </p>
 
-                        <h2 className="text-3xl font-semibold sm:text-4xl">
+                        <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
                             Explore Our Job Roles
                         </h2>
 
-                        <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-400">
+                        <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-400">
                             Find a role that matches your skills. Expand a job to
                             view its responsibilities and requirements.
                         </p>
 
-                        <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.03] px-3.5 py-1.5 text-sm text-slate-400">
+                        <div className="mt-6 inline-flex items-center gap-2.5 rounded-full border border-blue-400/15 bg-blue-500/[0.06] px-4 py-2 text-sm text-slate-300">
                             <BriefcaseBusiness className="size-4 text-blue-400" />
                             {jobs.length} career roles
                         </div>
                     </div>
 
-                    <div className="space-y-4">
+                    <div className="space-y-6">
                         {jobs.map((job) => {
                             const Icon = job.icon
                             const subject = `Application - ${job.title}`
-                            const applicationLink =
-                                `mailto:${applicationEmail}` +
-                                `?subject=${encodeURIComponent(subject)}`
+                            const applicationLink = `mailto:${applicationEmail}?subject=${encodeURIComponent(subject)}`
 
                             return (
                                 <article
                                     key={job.id}
-                                    className="group overflow-hidden rounded-2xl border border-white/[0.09] bg-[#071225] transition-all duration-300 hover:border-blue-400/30 hover:shadow-[0_0_0_1px_rgba(59,130,246,0.08),0_12px_40px_-16px_rgba(7,140,255,0.15)]"
+                                    className="group overflow-hidden rounded-2xl border border-white/[0.09] bg-gradient-to-br from-[#0b1a32] via-[#071225] to-[#050d1d] shadow-[0_16px_40px_-28px_rgba(0,0,0,0.95)] transition-all duration-500 hover:border-blue-400/30 hover:shadow-[0_0_0_1px_rgba(59,130,246,0.12),0_24px_60px_-20px_rgba(7,140,255,0.28)]"
                                 >
-                                    <div className="p-5 sm:p-6">
-                                        <div className="flex items-start gap-4">
-                                            <div className="flex size-11 shrink-0 items-center justify-center rounded-xl border border-blue-400/15 bg-blue-500/[0.08] transition group-hover:border-blue-400/25 group-hover:bg-blue-500/[0.12]">
+                                    <div className="p-7 sm:p-8">
+                                        <div className="flex items-start gap-5">
+                                            <div className="flex size-13 shrink-0 items-center justify-center rounded-xl border border-blue-400/20 bg-blue-500/[0.11] shadow-inner transition-all duration-300 group-hover:border-blue-400/40 group-hover:bg-blue-500/[0.18] group-hover:shadow-[0_0_24px_-6px_rgba(59,130,246,0.45)]">
                                                 <Icon className="size-5 text-blue-400" />
                                             </div>
 
                                             <div className="min-w-0 flex-1">
-                                                <h3 className="text-lg font-semibold leading-snug sm:text-xl">
+                                                <h3 className="text-lg font-semibold leading-snug tracking-tight sm:text-xl">
                                                     {job.title}
                                                 </h3>
                                                 <p className="mt-1.5 text-sm text-slate-400">
@@ -451,40 +508,40 @@ export default function CareersPage() {
                                             </div>
                                         </div>
 
-                                        <p className="mt-4 text-sm leading-6 text-slate-400">
+                                        <p className="mt-5 text-sm leading-7 text-slate-300/85">
                                             {job.summary}
                                         </p>
 
-                                        <div className="mt-4 flex flex-wrap gap-2">
+                                        <div className="mt-5 flex flex-wrap gap-2">
                                             {job.skills.map((skill) => (
                                                 <span
                                                     key={skill}
-                                                    className="rounded-md border border-white/[0.08] bg-white/[0.035] px-2.5 py-1.5 text-xs text-slate-300 transition group-hover:border-white/[0.12]"
+                                                    className="rounded-lg border border-blue-300/[0.12] bg-blue-500/[0.06] px-3.5 py-1.5 text-xs font-medium text-slate-300 transition-colors duration-300 group-hover:border-blue-300/[0.22] group-hover:bg-blue-500/[0.1]"
                                                 >
                                                     {skill}
                                                 </span>
                                             ))}
                                         </div>
 
-                                        <div className="mt-5 flex flex-col gap-3 border-t border-white/[0.07] pt-5 sm:flex-row sm:items-center sm:justify-between">
+                                        <div className="mt-7 flex flex-col gap-4 border-t border-white/[0.07] pt-6 sm:flex-row sm:items-center sm:justify-between">
                                             <details className="group/details">
-                                                <summary className="flex cursor-pointer list-none items-center gap-2 py-2 text-sm font-medium text-blue-300 transition hover:text-blue-200 [&::-webkit-details-marker]:hidden">
+                                                <summary className="flex cursor-pointer list-none items-center gap-2.5 py-1.5 text-sm font-medium text-blue-300 transition-colors hover:text-blue-200 [&::-webkit-details-marker]:hidden">
                                                     View Job Details
-                                                    <ChevronDown className="size-4 transition-transform group-open/details:rotate-180" />
+                                                    <ChevronDown className="size-4 transition-transform duration-300 group-open/details:rotate-180" />
                                                 </summary>
 
-                                                <div className="mt-5 space-y-6 border-t border-white/[0.07] pt-5 sm:pr-4">
+                                                <div className="mt-6 space-y-7 border-t border-white/[0.06] pt-6 sm:pr-6">
                                                     <div>
-                                                        <h4 className="mb-3 text-sm font-semibold text-white">
+                                                        <h4 className="mb-3.5 text-sm font-semibold tracking-tight text-white">
                                                             Responsibilities
                                                         </h4>
-                                                        <ul className="space-y-2.5">
+                                                        <ul className="space-y-3">
                                                             {job.responsibilities.map((item) => (
                                                                 <li
                                                                     key={item}
-                                                                    className="flex gap-2.5 text-sm leading-6 text-slate-400"
+                                                                    className="flex gap-3 text-sm leading-6 text-slate-400"
                                                                 >
-                                                                    <CheckCircle2 className="mt-1 size-4 shrink-0 text-blue-400" />
+                                                                    <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-blue-400" />
                                                                     <span>{item}</span>
                                                                 </li>
                                                             ))}
@@ -492,27 +549,27 @@ export default function CareersPage() {
                                                     </div>
 
                                                     <div>
-                                                        <h4 className="mb-3 text-sm font-semibold text-white">
+                                                        <h4 className="mb-3.5 text-sm font-semibold tracking-tight text-white">
                                                             Requirements
                                                         </h4>
-                                                        <ul className="space-y-2.5">
+                                                        <ul className="space-y-3">
                                                             {job.requirements.map((item) => (
                                                                 <li
                                                                     key={item}
-                                                                    className="flex gap-2.5 text-sm leading-6 text-slate-400"
+                                                                    className="flex gap-3 text-sm leading-6 text-slate-400"
                                                                 >
-                                                                    <CheckCircle2 className="mt-1 size-4 shrink-0 text-blue-400" />
+                                                                    <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-blue-400" />
                                                                     <span>{item}</span>
                                                                 </li>
                                                             ))}
                                                         </ul>
                                                     </div>
 
-                                                    <div className="rounded-xl border border-white/[0.07] bg-white/[0.025] p-4">
-                                                        <h4 className="text-xs font-semibold uppercase tracking-wider text-blue-300">
+                                                    <div className="rounded-xl border border-blue-300/[0.12] bg-gradient-to-br from-blue-500/[0.08] to-transparent p-5">
+                                                        <h4 className="text-xs font-semibold uppercase tracking-[0.15em] text-blue-300">
                                                             Preferred Experience
                                                         </h4>
-                                                        <p className="mt-2 text-sm leading-6 text-slate-400">
+                                                        <p className="mt-2.5 text-sm leading-6 text-slate-400">
                                                             {job.preferred}
                                                         </p>
                                                     </div>
@@ -521,7 +578,7 @@ export default function CareersPage() {
 
                                             <a
                                                 href={applicationLink}
-                                                className="inline-flex h-10 items-center justify-center gap-2 rounded-lg bg-[#078cff] px-4 text-sm font-semibold transition hover:bg-[#159cff] sm:shrink-0"
+                                                className="inline-flex h-11 items-center justify-center gap-2.5 rounded-xl bg-[#078cff] px-5 text-sm font-semibold shadow-[0_8px_28px_-10px_rgba(7,140,255,0.85)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#159cff] hover:shadow-[0_12px_32px_-10px_rgba(7,140,255,0.95)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-300 sm:shrink-0"
                                             >
                                                 Apply for This Role
                                                 <ArrowRight className="size-4" />
@@ -532,8 +589,6 @@ export default function CareersPage() {
                             )
                         })}
                     </div>
-
-                   
                 </div>
             </section>
         </main>
