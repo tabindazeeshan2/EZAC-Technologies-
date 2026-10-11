@@ -16,6 +16,9 @@ const siteUrl = 'https://www.ezactechnologies.com'
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
 
+  alternates: {
+  canonical: '/',
+  },
   title: {
     default: 'EZAC Technologies | Building Smart Digital Solutions',
     template: '%s | EZAC Technologies',
