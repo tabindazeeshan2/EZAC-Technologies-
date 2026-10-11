@@ -137,10 +137,10 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        'fixed inset-x-0 top-0 z-50 transition-all duration-300',
-        scrolled
-          ? 'border-b border-white/[0.06] bg-[#020817]/85 shadow-[0_8px_32px_rgba(0,0,0,0.35)] backdrop-blur-2xl'
-          : 'border-b border-transparent bg-transparent'
+        'fixed inset-x-0 top-0 z-50 border-b transition-all duration-300',
+        scrolled || pathname !== '/'
+          ? 'border-white/[0.06] bg-[#020817]/95 shadow-[0_8px_32px_rgba(0,0,0,0.25)] backdrop-blur-2xl'
+          : 'border-transparent bg-[#020817]/70 backdrop-blur-xl'
       )}
     >
       <nav className="mx-auto flex h-[76px] max-w-[1600px] items-center justify-between px-6 sm:px-8 lg:px-12 xl:px-16">
