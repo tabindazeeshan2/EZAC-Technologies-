@@ -24,12 +24,13 @@ export const site = {
   linkedinName: 'EZAC Technologies',
 }
 
+
 export const navLinks = [
   { label: 'Home', href: '#home' },
   { label: 'About', href: '#about' },
   { label: 'Services', href: '#services' },
-  { label: 'Careers', href: '/careers' },
   { label: 'Contact', href: '#contact' },
+  { label: 'Careers', href: '/careers' },
 ]
 
 
