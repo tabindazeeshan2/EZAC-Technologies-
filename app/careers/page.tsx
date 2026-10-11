@@ -523,14 +523,14 @@ export default function CareersPage() {
                                             ))}
                                         </div>
 
-                                        <div className="mt-7 flex flex-col gap-4 border-t border-white/[0.07] pt-6 sm:flex-row sm:items-center sm:justify-between">
+                                        <div className="mt-7 flex flex-col gap-4 border-t border-white/[0.07] pt-6 sm:flex-row sm:items-start sm:justify-between">
                                             <details className="group/details">
                                                 <summary className="flex cursor-pointer list-none items-center gap-2.5 py-1.5 text-sm font-medium text-blue-300 transition-colors hover:text-blue-200 [&::-webkit-details-marker]:hidden">
                                                     View Job Details
                                                     <ChevronDown className="size-4 transition-transform duration-300 group-open/details:rotate-180" />
                                                 </summary>
 
-                                                <div className="mt-6 space-y-7 border-t border-white/[0.06] pt-6 sm:pr-6">
+                                                <div className="mt-6 space-y-7 sm:pr-6">
                                                     <div>
                                                         <h4 className="mb-3.5 text-sm font-semibold tracking-tight text-white">
                                                             Responsibilities
