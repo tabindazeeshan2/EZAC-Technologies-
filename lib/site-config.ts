@@ -28,8 +28,10 @@ export const navLinks = [
   { label: 'Home', href: '#home' },
   { label: 'About', href: '#about' },
   { label: 'Services', href: '#services' },
+  { label: 'Careers', href: '/careers' },
   { label: 'Contact', href: '#contact' },
 ]
+
 
 
 
@@ -199,11 +201,3 @@ export const serviceOptions = [
   'Other',
 ]
 
-export const budgetOptions = [
-  'Not sure yet',
-  'Under $1,000',
-  '$1,000 – $5,000',
-  '$5,000 – $10,000',
-  '$10,000+',
-  'Prefer to discuss',
-]
