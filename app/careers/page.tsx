@@ -19,62 +19,7 @@ import {
 } from 'lucide-react'
 
 const jobs = [
-    {
-        id: 'android-developer',
-        title: 'Android Developer',
-        department: 'Mobile Development',
-        icon: Smartphone,
-        summary:
-            'Develop native Android applications from initial design and development through testing and Google Play deployment.',
-        skills: ['Kotlin / Java', 'Android Studio', 'REST APIs', 'Google Play Console'],
-        responsibilities: [
-            'Develop Android applications using Kotlin or Java and Android Studio.',
-            'Build interfaces using Jetpack Compose or XML layouts.',
-            'Integrate APIs, authentication, databases, notifications, and third-party services.',
-            'Test applications on emulators and physical devices and resolve performance issues.',
-            'Prepare signed APK/AAB builds and manage release versions.',
-            'Publish applications through Google Play Console and maintain production releases.',
-        ],
-        requirements: [
-            'Bachelor’s degree in Computer Science, Software Engineering, Information Technology, or a related field.',
-            'Practical knowledge of Kotlin or Java and the Android SDK.',
-            'Experience with Android Studio, Gradle, Git, and debugging.',
-            'Understanding of REST APIs, JSON, authentication, and local data storage.',
-            'Knowledge of application architecture, testing, and performance optimisation.',
-            'Ability to configure signing, prepare production builds, and deploy through Google Play Console.',
-            'Understanding of Play Store submission requirements and post-deployment troubleshooting.',
-        ],
-        preferred:
-            'Jetpack Compose, Firebase, automated testing, CI/CD, and previously published Android applications.',
-    },
-    {
-        id: 'ios-developer',
-        title: 'iOS Developer',
-        department: 'Mobile Development',
-        icon: Smartphone,
-        summary:
-            'Build, test, and publish iOS applications, managing the process from development to App Store release.',
-        skills: ['Swift', 'Xcode', 'SwiftUI / UIKit', 'App Store Connect'],
-        responsibilities: [
-            'Develop native iOS applications using Swift, Xcode, and SwiftUI or UIKit.',
-            'Build responsive interfaces and implement application navigation and data persistence.',
-            'Integrate REST APIs, authentication, notifications, and third-party services.',
-            'Test applications using simulators and physical Apple devices.',
-            'Configure bundle identifiers, signing certificates, provisioning profiles, and release builds.',
-            'Manage TestFlight distribution, App Store Connect submissions, review feedback, and production updates.',
-        ],
-        requirements: [
-            'Bachelor’s degree in Computer Science, Software Engineering, Information Technology, or a related field.',
-            'Practical knowledge of Swift and native iOS development.',
-            'Experience with Xcode, Git, debugging, and application lifecycle management.',
-            'Understanding of SwiftUI or UIKit, REST APIs, JSON, and data persistence.',
-            'Knowledge of signing certificates, provisioning profiles, and release configuration.',
-            'Ability to prepare production builds, configure TestFlight, and deploy through App Store Connect.',
-            'Understanding of App Store guidelines, testing, and post-release maintenance.',
-        ],
-        preferred:
-            'Firebase, Swift Package Manager, automated testing, CI/CD, and previously published iOS applications.',
-    },
+    
     {
         id: 'flutter-developer',
         title: 'Flutter Developer',
