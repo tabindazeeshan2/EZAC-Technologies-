@@ -20,61 +20,7 @@ import {
 
 const jobs = [
     
-    {
-        id: 'flutter-developer',
-        title: 'Flutter Developer',
-        department: 'Mobile Development',
-        icon: Code2,
-        summary:
-            'Create cross-platform Android and iOS applications with consistent interfaces and reliable backend integrations.',
-        skills: ['Flutter', 'Dart', 'API Integration', 'Mobile Deployment'],
-        responsibilities: [
-            'Develop applications using Flutter and Dart.',
-            'Implement navigation, reusable widgets, and state management.',
-            'Integrate APIs, authentication, databases, and third-party services.',
-            'Test and optimise applications across Android and iOS devices.',
-            'Prepare signed Android releases and manage Google Play submissions.',
-            'Configure iOS builds, signing, TestFlight, and App Store submissions.',
-        ],
-        requirements: [
-            'Bachelor’s degree in Computer Science, Software Engineering, Information Technology, or a related field.',
-            'Knowledge of Flutter, Dart, and mobile application architecture.',
-            'Experience with state management, REST APIs, and Git.',
-            'Understanding of Android Studio, Xcode, and platform-specific configuration.',
-            'Ability to build, test, sign, and deploy applications to Google Play and the Apple App Store.',
-            'Knowledge of debugging, performance optimisation, and release workflows.',
-        ],
-        preferred:
-            'Firebase, mobile CI/CD, automated testing, and experience maintaining published applications.',
-    },
-    {
-        id: 'full-stack-developer',
-        title: 'Full-Stack Web Developer',
-        department: 'Software & Web Development',
-        icon: Code2,
-        summary:
-            'Build responsive websites, web applications, dashboards, and business platforms using modern frontend and backend technologies.',
-        skills: ['React', 'Next.js', 'TypeScript', 'Backend APIs'],
-        responsibilities: [
-            'Build interfaces using React, Next.js, TypeScript, and Tailwind CSS.',
-            'Develop backend services, authentication, APIs, and database integrations.',
-            'Integrate third-party platforms and business tools.',
-            'Write maintainable code and test application functionality and security.',
-            'Deploy applications using Vercel or suitable cloud and server environments.',
-            'Configure domains, DNS, SSL, environment variables, and production integrations.',
-        ],
-        requirements: [
-            'Bachelor’s degree in Computer Science, Software Engineering, Information Technology, or a related field.',
-            'Knowledge of JavaScript or TypeScript, React, and modern web development.',
-            'Experience with Next.js or a comparable web framework.',
-            'Understanding of backend development, REST APIs, and SQL or NoSQL databases.',
-            'Knowledge of Git, responsive design, debugging, and web security.',
-            'Ability to deploy production applications and troubleshoot hosting issues.',
-            'Understanding of domains, DNS, SSL certificates, and environment configuration.',
-        ],
-        preferred:
-            'Authentication systems, payment integrations, CI/CD, cloud hosting, and performance optimisation.',
-    },
+   
     {
         id: 'ai-developer',
         title: 'AI & Automation Developer',
@@ -214,33 +160,7 @@ const jobs = [
         preferred:
             'Experience with HR management systems, recruitment platforms, performance management, and employee engagement initiatives.',
     },
-    {
-        id: 'marketing-specialist',
-        title: 'Digital Marketing Specialist',
-        department: 'Marketing & Growth',
-        icon: TrendingUp,
-        summary:
-            'Plan and execute digital marketing activities to strengthen brand awareness, generate leads, and grow EZAC Technologies’ online presence.',
-        skills: ['SEO', 'Social Media', 'Content Marketing', 'Analytics'],
-        responsibilities: [
-            'Develop and implement digital marketing plans aligned with business goals.',
-            'Manage company social media accounts and prepare engaging content.',
-            'Conduct keyword research and implement on-page SEO improvements.',
-            'Write and coordinate website content, service pages, and marketing campaigns.',
-            'Monitor website traffic, engagement, and campaign performance.',
-            'Research competitors, identify marketing opportunities, and recommend improvements.',
-        ],
-        requirements: [
-            'Bachelor’s degree in Marketing, Business, Communications, or a related field.',
-            'Knowledge of digital marketing, social media management, and content creation.',
-            'Understanding of SEO, keyword research, and website optimisation.',
-            'Ability to write clear, professional marketing copy.',
-            'Familiarity with Google Analytics, Search Console, or similar reporting tools.',
-            'Strong communication, creativity, and analytical skills.',
-        ],
-        preferred:
-            'Experience with paid advertising, email marketing, Canva, marketing automation, and lead-generation campaigns.',
-    },
+    
 ]
 
 const values = [
