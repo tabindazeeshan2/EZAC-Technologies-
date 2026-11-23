@@ -22,6 +22,7 @@ export const metadata: Metadata = {
   title: {
     default: 'EZAC Technologies | Building Smart Digital Solutions',
     template: '%s | EZAC Technologies',
+    
   },
 
   description:
@@ -53,7 +54,12 @@ export const metadata: Metadata = {
   },
 
   generator: 'v0.app',
+  icons: {
+    icon: '/icon.png',
+    apple: '/apple-icon.png',
+  },
 }
+
 export const viewport: Viewport = {
   colorScheme: 'dark',
   themeColor: '#020817',
