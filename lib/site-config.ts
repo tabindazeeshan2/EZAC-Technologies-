@@ -20,7 +20,7 @@ export const site = {
   email: 'info@ezactechnologies.com',
   linkedin: 'https://www.linkedin.com/company/ezac-technologies',
   instagram: 'https://www.instagram.com/ezactechnologies_',
-  instagramHandle: '@ezactechnologies',
+  instagramHandle: '@ezactechnologies_',
   linkedinName: 'EZAC Technologies',
 }
 
